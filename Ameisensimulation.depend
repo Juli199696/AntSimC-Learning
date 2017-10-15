@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1508072669 source:f:\backups\alles\daten\schule\programmieren\ameisensimulation\main.cpp
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	"rlutil.h"
+
+1505638867 source:f:\backups\alles\daten\schule\programmieren\ameisensimulation\newantsborn.cpp
+
+1505641393 f:\backups\alles\daten\schule\programmieren\ameisensimulation\global.h
+
+1505641080 source:f:\backups\alles\daten\schule\programmieren\ameisensimulation\wetter.cpp
+	<iostream>
+	<conio.h>
+	<windows.h>
+	"global.h"
+
+1464907768 f:\backups\alles\daten\schule\programmieren\ameisensimulation\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
