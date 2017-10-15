@@ -34,6 +34,7 @@ Changelog 15.10.2017:
 # Changes to simulation itself (Add shop, add new variables for shop).
 # Highscore now can be watched every round without the game to be restarted.
 # General code cleanup.
+# TEST FOR GITHUB MERGE.
 
 - New Born Ants, for now i have remove the feature to create new ants when you got enough of food and water. This will be added later on again!
 - Removed some unused variables and old code
@@ -174,8 +175,6 @@ void Ameisensterben()
         }
     }
 }
-
-
 /*
 ==============================================================================================================================
 Lebensmittel verbrauch
@@ -217,7 +216,6 @@ void Lebensmittel()
         }
     }
 }
-
 /*
 ==============================================================================================================================
 Nachrichten / Ameisen Informationen
@@ -276,7 +274,6 @@ void Nachrichten()
         cout << "                                                    ";
     }
 }
-
 //Befehle
 void shop()
 {
@@ -499,7 +496,6 @@ void shop()
         }
     }
 }
-
 void hotkeys ()
 {
     if(GetKeyState('1') & 0x8000/*check if high-order bit is set (1 << 15)*/)
@@ -554,7 +550,6 @@ void hotkeys ()
         }
     }
 }
-
 /*
 ==============================================================================================================================
 Ameisen bewegung und grundfunktionen
@@ -655,7 +650,6 @@ void simulation()
         }
     }
 }
-
 /*
 ==============================================================================================================================
 Startprogramm zum ausführen der Simulation.
