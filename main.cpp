@@ -37,21 +37,21 @@ Changelog 15.10.2017:
 # TEST FOR GITHUB MERGE.
 
 - New Born Ants, for now i have remove the feature to create new ants when you got enough of food and water. This will be added later on again!
-- Removed some unused variables and old code
-
+- Removed some unused variables and old code.
+- Removed rlutil.h as it is not needed anymore.
 ==============================================================================================================================*/
 #include <iostream>
 #include <conio.h>   // für getch()
 #include <windows.h>
 #include <fstream>
 #include <string>
-#include "rlutil.h"
 
 //#include "global.h"
 int wasser;
 int nahrung;
 int glasses;
-int anz;             //Anzahl der Ameisen Random
+int anz;
+int newant;           //Anzahl der Ameisen Random
 int happy;
 int tot;
 int bornant;
@@ -139,17 +139,6 @@ Ameisen sterben
 */
 void Ameisensterben()
 {
-    if (nahrung > 90)
-    {
-        /*  bornant = rand() %10;
-
-          if (bornant == 1)
-          {
-
-          }
-          bornant = 0; */
-    }
-
     if (nahrung < 10)
     {
         tot = rand() %10 +1;
@@ -223,19 +212,19 @@ Nachrichten / Ameisen Informationen
 */
 void Nachrichten()
 {
-    if (nahrung > 75)
+    if (nahrung < 75)
     {
         happy = 3;
     }
-    if (nahrung > 50)
+    if (nahrung < 50)
     {
         happy = 2;
     }
-    if (nahrung > 25)
+    if (nahrung < 25)
     {
         happy = 1;
     }
-    if (nahrung < 15)
+    if (nahrung > 15)
     {
         happy = 0;
     }
@@ -557,15 +546,14 @@ Ameisen bewegung und grundfunktionen
 */
 void simulation()
 {
-    int (start());
     srand (time(NULL));
-    anz = rand()%50+3;
     int x[anz];
     int y[anz];
+    int i =0;
     char ameisen[anz];
     //const int anz = 5; //Anzahl der Ameisen
 
-    for (int i = 0; i < anz; i++)  //Ameisen werden hinzugefügt
+    for (i = 0; i < anz; i++)  //Ameisen werden hinzugefügt
     {
         ameisen[i] = '*';
         x[i] = rand()%77+2;     //Ameisen Spawn
@@ -573,6 +561,7 @@ void simulation()
     }
     while (ende == 0) //Solange das Spiel nicht beendet ist, führe das aus.
     {
+
         for ( int zeit = 1; zeit++;)
         {
             hotkeys ();
@@ -587,9 +576,12 @@ void simulation()
             SetMyCursor(29,24);
             {
                 cout << "Tage:" << zeit;
-                _sleep(10);
+                _sleep(100);
                 cout  << "  ";
             }
+            newant = 0;
+            if (newant == 0)
+            {
             for (int i = 0; i < anz; i++)
             {
                 zufallszahl = rand() %9 +1; //Hier  wird die Ameise zufällig bewegt.
@@ -606,19 +598,33 @@ void simulation()
                 if (zufallszahl == 4 && y[i] != 2)
                     BewegeAmeise(x[i], y[i], x[i], y[i]-1);
 
-                if (zufallszahl == 4 && x[i] != 78)
+                if (zufallszahl == 5 && x[i] != 78)
                     BewegeAmeise(x[i], y[i], x[i]+1, y[i]);
 
-                if (zufallszahl == 5 && x[i] != 78 && y[i] != 2)
+                if (zufallszahl == 6 && x[i] != 78 && y[i] != 2)
                     BewegeAmeise(x[i], y[i], x[i]+1, y[i]-1);
 
-                if (zufallszahl == 6 && x[i] != 2 && y[i] != 22)
+                if (zufallszahl == 7 && x[i] != 2 && y[i] != 22)
                     BewegeAmeise(x[i], y[i], x[i]-1, y[i]+1);
 
-                if (zufallszahl == 7 && y[i] != 22)
+                if (zufallszahl == 8 && y[i] != 22)
                     BewegeAmeise(x[i], y[i], x[i], y[i]+1);
 
-                if (zufallszahl == 8) {};
+                if (zufallszahl == 9) {};
+
+                if (nahrung > 85)
+                {
+                    bornant = rand() %200;
+
+                    if (bornant == 1)
+                    {
+                        anz++;
+                        newant =1;
+                        bornant =0;
+                    }
+
+                }
+            }
             }
 
             /*
@@ -645,11 +651,13 @@ void simulation()
             }
             if (ende == 1)
             {
+                int (start());
                 start();
             }
         }
     }
 }
+
 /*
 ==============================================================================================================================
 Startprogramm zum ausführen der Simulation.
@@ -684,7 +692,8 @@ void start()
         wasser = 50;
         nahrung = 50;
         glasses = 0;
-        anz = 0;             //Anzahl der Ameisen Random
+        anz = rand()%50+3;
+        newant = 0;            //Anzahl der Ameisen Random
         happy = 1;
         tot = 0;
         bornant = 0;
