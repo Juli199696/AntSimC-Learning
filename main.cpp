@@ -4,9 +4,9 @@
 Allgemeine Programm Infos wie Changelog und vorhandene Funktionen.
 ==============================================================================================================================
 
-Neue Funktion | +
-Veränderungen | #
-Gelöscht      | -
+New functions     | +
+Changed functions | #
+Deleted functions | -
 
 Vorhandene Funktionen:
 -------------------------------------------------------------------------------------------------------------------------------
@@ -14,16 +14,30 @@ Ameisensterben          : Ameisen können sterben wenn Sie zu wenig Nahrung/ Was
 BewegeAmeise            : Ameisen werden zufällig bewegt.
 Lebensmittel            : Ist für den verbrauch und das hinzufügen von Lebensmitteln wie Nahrung und Wasser zuständig.
 Main                    : Startet das Grundprogramm.
-Nachrichten             : News System begonnen und in Simulation eingepflegt.
+Nachrichten             : News System informiert über aktuelle geschehnisse.
 SetMyCurser             : Ist für das Setzten des Cursers in der Console verantwortlich und kann jederzeit verändert werden.
 Simulation              : Lässt die Zeit laufen und ist mit für die Bewegung der Ameisen zuständig.
 Spielfeld               : Baut / setzt den Spielfeld Rand und Objekte.
 Start                   : Ist für das Hauptmenu zuständig.
+Highscore               : Es ist nun möglich den Highscore vom letzten Spiel in einer Text Datei zu speichern und nachträglich wieder aufzurufen.
 
-Changelog 31.03.2014:
+Changelog 15.10.2017:
 
-# Lebensmittel verbrauch geht nicht mehr ins Minus. (Muss noch gefixt werden da verbrauch niedriger wird um so mehr Ameisen es sind.
-# Generelle Code säuberung.
+*Inital Commit on Github.
+
++ Bugfixes for crashs and the ability to restart the simulation.
++ Ant Shop (You can now buy Food and Water for your ants to stay alive and rise your highscore!
++ Money money money! I have implemented a simple economy system but its not ready to use yet. You can use that money to buy new stuff from the shop or expand your current ant colony.
++ You can have highscores saved in text file!
++ I have added a game.cfg file which does not contain any usefull commands at the moment but will be handy to have later on.
+
+# Changes to simulation itself (Add shop, add new variables for shop).
+# Highscore now can be watched every round without the game to be restarted.
+# General code cleanup.
+
+- New Born Ants, for now i have remove the feature to create new ants when you got enough of food and water. This will be added later on again!
+- Removed some unused variables and old code
+
 ==============================================================================================================================*/
 #include <iostream>
 #include <conio.h>   // für getch()
@@ -33,32 +47,26 @@ Changelog 31.03.2014:
 #include "rlutil.h"
 
 //#include "global.h"
-int wasser = 15;
-int nahrung = 15;
-int glasses = 0;
-int anz = 0;             //Anzahl der Ameisen Random
-int happy = 1;
+int wasser;
+int nahrung;
+int glasses;
+int anz;             //Anzahl der Ameisen Random
+int happy;
 int tot;
-int bornant = 0;
-int regen = 0;
-int sonne = 0;
-int sturm = 0;
-int blaetter = 0;
-int angreifer = 0;
-int ende = 0;
+int bornant;
+int regen;
+int sonne;
+int sturm;
+int blaetter;
+int angreifer;
+int ende;
 int ameisenmax;
-int gamerunning = 1;
-int geld = 50;
+int gamerunning;
+int geld;
 
 using namespace std;
 
 //Generell nutzbare Variablen
-
-
-
-
-
-
 /*
 ==============================================================================================================================
 Setzt die Position des Cursers um Zeichen zu setzen.
@@ -345,7 +353,12 @@ void shop()
                             }
                             else
                             {
-                                cout << "Are you sure you want to buy " << amounttobuy << " of " << sales << " ?" << endl;
+                                if (sales == 1)
+                                {
+
+
+                                    cout << "Are you sure you want to buy " << amounttobuy << " of leaves?" << endl;
+                                }
                                 cin >> yesorno;
                                 if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
                                 {
@@ -393,7 +406,12 @@ void shop()
                             }
                             else
                             {
-                                cout << "Are you sure you want to buy " << amounttobuy << " of " << sales << " ?" << endl;
+                                if (sales == 2)
+                                {
+
+
+                                    cout << "Are you sure you want to buy " << amounttobuy << " of water?" << endl;
+                                }
                                 cin >> yesorno;
                                 if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
                                 {
@@ -407,14 +425,14 @@ void shop()
                     }
                 }
                 else
-				{
-					cout << "You dont got enough money!";
-				}
+                {
+                    cout << "You dont got enough money!";
+                }
 
 
 
-			}
-			if(GetKeyState('7') & 0x8000/*check if high-order bit is set (1 << 15)*/)
+            }
+            if(GetKeyState('7') & 0x8000/*check if high-order bit is set (1 << 15)*/)
             {
                 if (geld > 0)
                 {
@@ -441,7 +459,12 @@ void shop()
                             }
                             else
                             {
-                                cout << "Are you sure you want to buy " << amounttobuy << " of " << sales << " ?" << endl;
+                                if (sales == 3)
+                                {
+
+
+                                    cout << "Are you sure you want to buy " << amounttobuy << " of glasses?" << endl;
+                                }
                                 cin >> yesorno;
                                 if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
                                 {
@@ -455,13 +478,13 @@ void shop()
                     }
                 }
                 else
-				{
-					cout << "You dont got enough money!";
-				}
+                {
+                    cout << "You dont got enough money!";
+                }
 
 
 
-			}
+            }
         }
 
 
@@ -532,20 +555,6 @@ void hotkeys ()
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 ==============================================================================================================================
 Ameisen bewegung und grundfunktionen
@@ -553,11 +562,6 @@ Ameisen bewegung und grundfunktionen
 */
 void simulation()
 {
-    //int wasser = 100;
-    //int nahrung = 100;
-    //int anz = 0;             //Anzahl der Ameisen Random
-    //int tot;
-
     int (start());
     srand (time(NULL));
     anz = rand()%50+3;
@@ -676,13 +680,30 @@ void start()
 
     SetMyCursor(60,26);      //Text für untere Leiste
     {
-        cout << "Ant Sim. v. 0.5 Dev." ;
+        cout << "Ant Sim. v. 1.0 Dev." ;
     }
     int zahl;
     SetMyCursor(1,10);
     cin >> zahl;
     if (zahl == 1)          //Bedingung für ausführung der Schleife 1, startet die Simulation
     {
+        wasser = 50;
+        nahrung = 50;
+        glasses = 0;
+        anz = 0;             //Anzahl der Ameisen Random
+        happy = 1;
+        tot = 0;
+        bornant = 0;
+        regen = 0;
+        sonne = 0;
+        sturm = 0;
+        blaetter = 0;
+        angreifer = 0;
+        ende = 0;
+        ameisenmax = 0;
+        gamerunning = 1;
+        geld = 50;
+
         system("cls");
         spielfeld();
         simulation();
@@ -694,6 +715,7 @@ void start()
 
     if (zahl == 3)          //Highscore
     {
+        system("cls");
         string line;
         ifstream score ("score.txt");
         if (score.is_open())
@@ -703,6 +725,9 @@ void start()
                 cout << line << '\n';
             }
             score.close();
+            getch();
+            system("cls");
+            start();
         }
         else cout << "Unable to open file";
     }
