@@ -10,9 +10,9 @@ Deleted functions | -
 
 Vorhandene Funktionen:
 -------------------------------------------------------------------------------------------------------------------------------
-Ameisensterben          : Ameisen können sterben wenn Sie zu wenig Nahrung/ Wasser haben.
+Ameisensterben          : Ameisen können sterben wenn Sie zu wenig leaves/ water haben.
 BewegeAmeise            : Ameisen werden zufällig bewegt.
-Lebensmittel            : Ist für den verbrauch und das hinzufügen von Lebensmitteln wie Nahrung und Wasser zuständig.
+Lebensmittel            : Ist für den verbrauch und das hinzufügen von Lebensmitteln wie leaves und water zuständig.
 Main                    : Startet das Grundprogramm.
 Nachrichten             : News System informiert über aktuelle geschehnisse.
 SetMyCurser             : Ist für das Setzten des Cursers in der Console verantwortlich und kann jederzeit verändert werden.
@@ -57,8 +57,8 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
     return written;
 }
 //Initialize every int var for the programm. I know this can be done much better. Feel free to correct me by making an issue on Github :)
-int wasser;
-int nahrung;
+int water;
+int leaves;
 int glasses;
 int anz;
 int newant;           //Anzahl der Ameisen Random
@@ -148,7 +148,7 @@ Ameisen sterben
 */
 void Ameisensterben()
 {
-    if (nahrung < 10)
+    if (leaves < 10)
     {
         tot = rand() %10 +1;
 
@@ -160,7 +160,7 @@ void Ameisensterben()
             }
         }
     }
-    if (wasser < 10)
+    if (water < 10)
     {
         tot = rand() %10 +1;
 
@@ -184,7 +184,7 @@ void Lebensmittel()
     Ameisensterben();
     SetMyCursor(2,24);
     {
-        cout << "Wasser:" << wasser << "%";
+        cout << "water:" << water << "%";
         cout  << "  ";
     }
     /* Ich hab keine Ahnung mehr wofür ich die kacke gebraucht habe.. Meh
@@ -195,22 +195,22 @@ void Lebensmittel()
     */
 
     {
-        cout << "Nahrung:" << nahrung << "%";
+        cout << "leaves:" << leaves << "%";
         cout  << "  ";
     }
     verbrauch = rand() %55 +1;
     if (verbrauch == 1)
     {
-        if (nahrung > 0)
+        if (leaves > 0)
         {
-            nahrung--;
+            leaves--;
         }
     }
     if (verbrauch == 2)
     {
-        if (wasser > 0)
+        if (water > 0)
         {
-            wasser--;
+            water--;
         }
     }
 }
@@ -221,19 +221,19 @@ Nachrichten / Ameisen Informationen
 */
 void Nachrichten()
 {
-    if (nahrung < 75)
+    if (leaves < 75)
     {
         happy = 3;
     }
-    if (nahrung < 50)
+    if (leaves < 50)
     {
         happy = 2;
     }
-    if (nahrung < 25)
+    if (leaves < 25)
     {
         happy = 1;
     }
-    if (nahrung > 15)
+    if (leaves > 15)
     {
         happy = 0;
     }
@@ -246,18 +246,18 @@ void Nachrichten()
     {
         cout << "Nachrichten: ";
     }
-    if (nahrung < 10)
+    if (leaves < 10)
     {
         SetMyCursor(1,27);
-        cout << "Es fehlt an Nahrung! ";
-        if (nahrung > 10)
+        cout << "Es fehlt an leaves! ";
+        if (leaves > 10)
             cout << "                                                    ";
     }
-    if (wasser < 10)
+    if (water < 10)
     {
         SetMyCursor(1,28);
-        cout << "Es fehlt an Wasser! ";
-        if (wasser > 10)
+        cout << "Es fehlt an water! ";
+        if (water > 10)
             cout << "                                                    ";
     }
     if (sturm == 1)
@@ -272,12 +272,44 @@ void Nachrichten()
         cout << "                                                    ";
     }
 }
+
+int buyMaterial(int currentAmount, int inStock, string materialName)
+{
+    int amounttobuy = 0;
+    int newAmount = currentAmount;
+    int checkout = 0;
+    string yesorno;
+
+    while (checkout == 0)
+    {
+        cout << "How much of " << materialName <<" you wanna buy?" << endl;
+        cin >> amounttobuy;
+
+        if (amounttobuy > inStock or amounttobuy <= 0)
+        {
+            cout << "You cant buy more than " << inStock << " or less than 0!";
+            system("cls");
+            checkout = 1;
+            break;
+        }
+        else
+        {
+            cout << "Are you sure you want to buy " << amounttobuy << " of " << materialName << endl;
+        }
+        cin >> yesorno;
+        if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
+        {
+            newAmount = currentAmount + amounttobuy;
+            cout << "You bought " << amounttobuy << " of " << materialName << endl;
+            checkout = 1;
+        }
+    }
+
+    return newAmount;
+}
 //Befehle
 void shop()
 {
-    string yesorno;
-    int amounttobuy = 0;
-
     int leavesinstock = rand()%(25-1 + 1) + 1;
 
     int waterinstock = rand()%(25-1+ 1) + 1;
@@ -287,7 +319,6 @@ void shop()
     int itemid = 0;
     system("cls");
     int shopping = 1;
-    int checkout = 10;
     while (shopping == 1)
     {
         if (itemid == 0)
@@ -295,100 +326,67 @@ void shop()
             itemid = rand()%(3-1 + 1) + 1;
         }
         SetMyCursor(0,1);
+
+        cout << "Welcome to the ant shop" << endl << endl << "Here you can buy some good stuff for your ant colony" << endl;
+        cout << "You have " << leaves << " leaves, " << water << " water and " << glasses << " glasses" << endl;
+        cout << endl << "Todays sales are:" << endl;
+        if (itemid == 1)
         {
-            cout << "Welcome to the ant shop" << endl << endl << "Here you can buy some good stuff for your ant colony" << endl << endl << "Todays sales are:" << endl;;
-
-            if (itemid == 1)
-            {
-                cout << "Leaves (Key 5) " << leavesinstock << " x";
-
-            }
-            if (itemid == 2)
-            {
-                cout << "Water (Key 6) " << waterinstock << " x";
-
-            }
-            if (itemid == 3)
-            {
-                cout << "Glasses (Key 7) " << glassesinstock << " x";
-
-            }
-
-            SetMyCursor(1,18);
-            {
-                cout << "Buy stuff with the shown key.";
-            }
-            SetMyCursor(1,20);
-            {
-                cout << "Press 0 to go back";
-            }
-
-            if(itemid == 1 & GetKeyState('5') & 0x8000 or itemid ==2 & GetKeyState('6') & 0x8000 or itemid ==3 & GetKeyState('7') & 0x8000 /*check if high-order bit is set (1 << 15)*/)
-            {
-                if (geld > 0)
-                {
-                    SetMyCursor(1,12);
-                    checkout = 0;
-                    {
-                        while (checkout == 0)
-                        {
-                            cout << "How much you wanna buy?" << endl;
-
-                            cin >> amounttobuy;
-
-                            if (amounttobuy > leavesinstock)
-                            {
-                                cout << "You cant buy more than " << leavesinstock << "!";
-                                Sleep(2000);
-                                system("cls");
-
-
-                            }
-                            if (amounttobuy <= 0)
-                            {
-                                cout << "You cant buy less than one!";
-                                system("cls");
-
-                            }
-                            else
-                            {
-
-                                cout << "Are you sure you want to buy " << amounttobuy << " of leaves?" << endl;
-                            }
-                            cin >> yesorno;
-                            if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
-                            {
-                                nahrung = nahrung + amounttobuy;
-                                cout << "You bought " << amounttobuy << " of " << itemid << endl;
-
-                            }
-                        }
-                    }
-
-                }
-                else
-                {
-                    cout << "You dont got enough money!";
-                }
-
-            }
+            cout << "Leaves (Key 5) " << leavesinstock << " x";
 
         }
+        if (itemid == 2)
+        {
+            cout << "Water (Key 6) " << waterinstock << " x";
+
+        }
+        if (itemid == 3)
+        {
+            cout << "Glasses (Key 7) " << glassesinstock << " x";
+
+        }
+
+        SetMyCursor(1,18);
+        {
+            cout << "Buy stuff with the shown key.";
+        }
+        SetMyCursor(1,20);
+        {
+            cout << "Press 0 to go back";
+        }
+
+        if(GetKeyState('5') & 0x8000)
+        {
+            SetMyCursor(1,12);
+            leaves = buyMaterial(leaves, leavesinstock, "Leaves");
+        }
+
+        if(GetKeyState('6') & 0x8000)
+        {
+            SetMyCursor(1,12);
+            water = buyMaterial(water, waterinstock, "Water");
+        }
+
+        if(GetKeyState('7') & 0x8000)
+        {
+            SetMyCursor(1,12);
+            glasses = buyMaterial(glasses, glassesinstock, "Lupe");
+        }
+getch();
+
+        if(GetKeyState('0') & 0x8000/*check if high-order bit is set (1 << 15)*/)
+        {
+            shopping = 0;
+            gamerunning = 1;
+            system("cls");
+            spielfeld();
+        }
+
     }
 
-
-
-
-    getch();
-    if(GetKeyState('0') & 0x8000/*check if high-order bit is set (1 << 15)*/)
-    {
-        shopping = 0;
-        gamerunning = 1;
-        system("cls");
-        spielfeld();
-    }
 
 }
+
 void hotkeys ()
 {
     if(GetKeyState('1') & 0x8000/*check if high-order bit is set (1 << 15)*/)
@@ -400,7 +398,7 @@ void hotkeys ()
             SetMyCursor(0,1);
             {
                 cout << "Ants Info" << endl << endl << "Here you can see how your ants are feeling and what they need!" << endl << "Please check here regulary for happy ants." << endl;
-                cout << "Your colony have " << anz <<" ants." << endl << endl << "You got " << nahrung << " food." << endl << "You got " << wasser << " water." << endl;
+                cout << "Your colony have " << anz <<" ants." << endl << endl << "You got " << leaves << " food." << endl << "You got " << water << " water." << endl;
                 if (happy == 3)
                 {
                     cout << "Your ants are very happy." << endl << "Good job!";
@@ -521,7 +519,7 @@ void simulation()
 
                     if (zufallszahl == 9) {};
 
-                    if (nahrung > 85)
+                    /*if (leaves > 85)
                     {
                         bornant = rand() %200;
 
@@ -532,7 +530,7 @@ void simulation()
                             bornant =0;
                         }
 
-                    }
+                    }*/
                 }
             }
 
@@ -547,11 +545,11 @@ void simulation()
                 {
                     Sleep(2000);
                     system("cls");
-                    cout << "GAME OVER" << endl << "You archived " << zeit << " days." << endl << "You got " << nahrung << " food and " << wasser << " water." << endl << "Your farm reached " << anz << " ants.";
+                    cout << "GAME OVER" << endl << "You archived " << zeit << " days." << endl << "You got " << leaves << " food and " << water << " water." << endl << "Your farm reached " << anz << " ants.";
                     Sleep(5000);
                     ofstream score;
                     score.open ("score.txt");
-                    score << "You archived " << zeit << " days." << endl << "You got " << nahrung << " food and " << wasser << " water." << endl << "Your farm reached " << anz << " ants.";
+                    score << "You archived " << zeit << " days." << endl << "You got " << leaves << " food and " << water << " water." << endl << "Your farm reached " << anz << " ants.";
                     score.close();
                     system("cls");
                     ende = 1;
@@ -601,8 +599,8 @@ void start()
     cin >> zahl;
     if (zahl == 1)          //Bedingung für ausführung der Schleife 1, startet die Simulation
     {
-        wasser = 50;
-        nahrung = 50;
+        water = 50;
+        leaves = 50;
         glasses = 0;
         anz = rand()%50+3;
         newant = 0;            //Anzahl der Ameisen Random
