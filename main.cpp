@@ -284,12 +284,16 @@ void shop()
 
     int glassesinstock = rand()%(3-1 + 1) + 1;
 
-    int sales = rand()%(3-1 + 1) + 1;
+    int sales = 0;
     system("cls");
     int shopping = 1;
     int checkout = 10;
     while (shopping == 1)
     {
+        if (sales == 0)
+        {
+            sales = rand()%(3-1 + 1) + 1;
+        }
 
         SetMyCursor(0,1);
         {
@@ -298,17 +302,17 @@ void shop()
 
             if (sales == 1)
             {
-                cout << "Leaves (5) " << leavesinstock << " x";
+                cout << "Leaves (Key 5) " << leavesinstock << " x";
 
             }
             if (sales == 2)
             {
-                cout << "Water (6) " << leavesinstock << " x";
+                cout << "Water (Key 6) " << leavesinstock << " x";
 
             }
             if (sales == 3)
             {
-                cout << "Glasses (7) " << leavesinstock << " x";
+                cout << "Glasses (Key 7) " << leavesinstock << " x";
 
             }
 
@@ -337,21 +341,23 @@ void shop()
                             if (amounttobuy > leavesinstock)
                             {
                                 cout << "You cant buy more than " << leavesinstock << "!";
-                                getch();
+                                Sleep(2000);
+                                system("cls");
                                 checkout = 10;
+                                shopping = 0;
+
                             }
                             if (amounttobuy <= 0)
                             {
                                 cout << "You cant buy less than one!";
-                                getch();
+                                system("cls");
                                 checkout = 10;
+                                shopping = 0;
                             }
                             else
                             {
                                 if (sales == 1)
                                 {
-
-
                                     cout << "Are you sure you want to buy " << amounttobuy << " of leaves?" << endl;
                                 }
                                 cin >> yesorno;
@@ -390,17 +396,21 @@ void shop()
                             if (amounttobuy > waterinstock)
                             {
                                 cout << "You cant buy more than " << waterinstock << "!";
-                                getch();
+                                system("cls");
                                 checkout = 10;
+                                shopping = 0;
+
                             }
                             if (amounttobuy <= 0)
                             {
                                 cout << "You cant buy less than one!";
-                                getch();
+                                system("cls");
                                 checkout = 10;
+                                shopping = 0;
                             }
-                            else
-                            {
+                            if (amounttobuy == amounttobuy)
+
+                                                            {
                                 if (sales == 2)
                                 {
 
@@ -419,6 +429,7 @@ void shop()
                         }
                     }
                 }
+
                 else
                 {
                     cout << "You dont got enough money!";
@@ -443,23 +454,21 @@ void shop()
                             if (amounttobuy > glassesinstock)
                             {
                                 cout << "You cant buy more than " << glassesinstock << "!";
-                                getch();
+                                system("cls");
                                 checkout = 10;
+                                shopping = 0;
                             }
                             if (amounttobuy <= 0)
                             {
                                 cout << "You cant buy less than one!";
-                                getch();
+                                system("cls");
                                 checkout = 10;
+                                shopping = 0;
                             }
-                            else
+                            if (sales =3)
                             {
-                                if (sales == 3)
-                                {
-
-
                                     cout << "Are you sure you want to buy " << amounttobuy << " of glasses?" << endl;
-                                }
+
                                 cin >> yesorno;
                                 if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
                                 {
@@ -467,6 +476,9 @@ void shop()
                                     cout << "You bought " << amounttobuy << " of " << sales << endl;
                                     checkout = 10;
 
+                                }
+                                 if (yesorno == "N" || yesorno == "n" || yesorno == "no" || yesorno == "No")
+                                {
                                 }
                             }
                         }
@@ -587,7 +599,7 @@ void simulation()
             SetMyCursor(29,24);
             {
                 cout << "Tage:" << zeit;
-                _sleep(100);
+                Sleep(100);
                 cout  << "  ";
             }
             newant = 0;
@@ -647,10 +659,10 @@ void simulation()
             {
                 SetMyCursor(0,5);
                 {
-                    _sleep(2000);
+                    Sleep(2000);
                     system("cls");
                     cout << "GAME OVER" << endl << "You archived " << zeit << " days." << endl << "You got " << nahrung << " food and " << wasser << " water." << endl << "Your farm reached " << anz << " ants.";
-                    _sleep(5000);
+                    Sleep(5000);
                     ofstream score;
                     score.open ("score.txt");
                     score << "You archived " << zeit << " days." << endl << "You got " << nahrung << " food and " << wasser << " water." << endl << "Your farm reached " << anz << " ants.";
