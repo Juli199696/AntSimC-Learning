@@ -693,10 +693,10 @@ void start()
 	cout << "|4. Check for updates (DEV BRANCH)                   |" << endl;
     cout << "|____________________________________________________|" << endl;
 
-    SetMyCursor(1,26);      //Text für untere Leiste
+    SetMyCursor(0,26);      //Text für untere Leiste
     {
         cout << "AntSimC++ Dev 1.3" << endl ;
-        cout << "AntSimC++ Dev 1.3";
+        cout << "+Hotfix for the updater";
     }
     int zahl;
     SetMyCursor(1,10);
