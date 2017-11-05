@@ -240,7 +240,7 @@ void Nachrichten()
 
     SetMyCursor(1,25);
     {
-        cout << "1 Ants 2 Shop 3 Environment";
+        cout << "1 Ants 2 Shop 3 Environment 4 Ende";
     }
     SetMyCursor(1,26);
     {
@@ -476,9 +476,6 @@ void shop()
                 {
                     cout << "You dont got enough money!";
                 }
-
-
-
             }
         }
 
@@ -546,6 +543,11 @@ void hotkeys ()
         {
             shop();
         }
+    }
+    if(GetKeyState('4') & 0x8000/*check if high-order bit is set (1 << 15)*/)
+    {
+        exit(0);
+
     }
 }
 /*
@@ -655,6 +657,7 @@ void simulation()
                     score.close();
                     system("cls");
                     ende = 1;
+
                 }
 
             }
