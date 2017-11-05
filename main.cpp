@@ -45,8 +45,17 @@ Changelog 15.10.2017:
 #include <windows.h>
 #include <fstream>
 #include <string>
-
+#include <curl/curl.h>
+#include <cstdlib>
 //#include "global.h"
+
+size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
+{
+    size_t written;
+    written = fwrite(ptr, size, nmemb, stream);
+    return written;
+}
+//Initialize every int var for the programm. I know this can be done much better. Feel free to correct me by making an issue on Github :)
 int wasser;
 int nahrung;
 int glasses;
@@ -67,7 +76,6 @@ int geld;
 
 using namespace std;
 
-//Generell nutzbare Variablen
 /*
 ==============================================================================================================================
 Setzt die Position des Cursers um Zeichen zu setzen.
@@ -683,7 +691,7 @@ void start()
 
     SetMyCursor(60,26);      //Text für untere Leiste
     {
-        cout << "Ant Sim. v. 1.0 Dev." ;
+        cout << "Ant Sim. v. 1.2 Dev." ;
     }
     int zahl;
     SetMyCursor(1,10);
@@ -735,7 +743,12 @@ void start()
         }
         else cout << "Unable to open file";
     }
-}
+    if (zahl == 4)          //Updates the program.
+        system("start Updater.exe" ) ;
+        exit(0);
+    }
+
+
 /*
 ==============================================================================================================================
 Das Hauptprogramm wird inizialisiert und führt die unter Programme aus.

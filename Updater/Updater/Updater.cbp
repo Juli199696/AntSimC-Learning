@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Updater" />
+		<Option pch_mode="2" />
+		<Option compiler="cygwin" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/Updater" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="../../libs/curl-7.39.0-devel-mingw32/include" />
+				</Compiler>
+				<Linker>
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libcrypto.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libcrypto.dll.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libcurl.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libcurldll.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libidn.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libidn.dll.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\librtmp.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libssh2.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libssh2dll.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libssl.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libssl.dll.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libz.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libz.dll.a" />
+					<Add library="..\..\libs\curl-7.39.0-devel-mingw32\lib\libzdll.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
