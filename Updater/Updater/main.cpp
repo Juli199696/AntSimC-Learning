@@ -4,6 +4,7 @@
 #include <sstream>
 #include <cstring>
 #include <fstream>
+
 using namespace std;
 
 
@@ -16,6 +17,19 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 
 void UpdaterDownload()
 {
+     if (system("ping -n 1 gaming-ftw.de")){
+          system("cls");
+          cout<<"\nNot connnected to the internet or blocked IP\n\n";
+          cout << "Update failed, go back to previous version.";
+          _sleep(2000);
+
+          system("start Ameisensimulation.exe");
+          exit(0);
+  }
+  else{
+          system("cls");
+          cout<<"\nConnected to the internet\n\n";
+
  CURL *curl;
      FILE *fp;
     CURLcode res;
@@ -52,6 +66,7 @@ void UpdaterDownload()
 
     }
     cout << "Update complete";
+}
 }
 
 int main()
