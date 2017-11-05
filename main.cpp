@@ -284,35 +284,33 @@ void shop()
 
     int glassesinstock = rand()%(3-1 + 1) + 1;
 
-    int sales = 0;
+    int itemid = 0;
     system("cls");
     int shopping = 1;
     int checkout = 10;
     while (shopping == 1)
     {
-        if (sales == 0)
+        if (itemid == 0)
         {
-            sales = rand()%(3-1 + 1) + 1;
+            itemid = rand()%(3-1 + 1) + 1;
         }
-
         SetMyCursor(0,1);
         {
             cout << "Welcome to the ant shop" << endl << endl << "Here you can buy some good stuff for your ant colony" << endl << endl << "Todays sales are:" << endl;;
 
-
-            if (sales == 1)
+            if (itemid == 1)
             {
                 cout << "Leaves (Key 5) " << leavesinstock << " x";
 
             }
-            if (sales == 2)
+            if (itemid == 2)
             {
-                cout << "Water (Key 6) " << leavesinstock << " x";
+                cout << "Water (Key 6) " << waterinstock << " x";
 
             }
-            if (sales == 3)
+            if (itemid == 3)
             {
-                cout << "Glasses (Key 7) " << leavesinstock << " x";
+                cout << "Glasses (Key 7) " << glassesinstock << " x";
 
             }
 
@@ -325,7 +323,7 @@ void shop()
                 cout << "Press 0 to go back";
             }
 
-            if(GetKeyState('5') & 0x8000/*check if high-order bit is set (1 << 15)*/)
+            if(itemid == 1 & GetKeyState('5') & 0x8000 or itemid ==2 & GetKeyState('6') & 0x8000 or itemid ==3 & GetKeyState('7') & 0x8000 /*check if high-order bit is set (1 << 15)*/)
             {
                 if (geld > 0)
                 {
@@ -356,152 +354,43 @@ void shop()
                             }
                             else
                             {
-                                if (sales == 1)
-                                {
-                                    cout << "Are you sure you want to buy " << amounttobuy << " of leaves?" << endl;
-                                }
-                                cin >> yesorno;
-                                if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
-                                {
-                                    nahrung = nahrung + amounttobuy;
-                                    cout << "You bought " << amounttobuy << " of " << sales << endl;
-                                    checkout = 10;
 
-                                }
+                                cout << "Are you sure you want to buy " << amounttobuy << " of leaves?" << endl;
+                            }
+                            cin >> yesorno;
+                            if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
+                            {
+                                nahrung = nahrung + amounttobuy;
+                                cout << "You bought " << amounttobuy << " of " << itemid << endl;
+                                checkout = 10;
+
                             }
                         }
                     }
+
                 }
                 else
                 {
                     cout << "You dont got enough money!";
                 }
 
-
-
             }
-            if(GetKeyState('6') & 0x8000/*check if high-order bit is set (1 << 15)*/)
-            {
-                if (geld > 0)
-                {
-                    SetMyCursor(1,12);
-                    checkout = 1;
-                    {
-                        while (checkout == 1)
-                        {
-                            cout << "How much you wanna buy?" << endl;
 
-                            cin >> amounttobuy;
-
-                            if (amounttobuy > waterinstock)
-                            {
-                                cout << "You cant buy more than " << waterinstock << "!";
-                                system("cls");
-                                checkout = 10;
-                                shopping = 0;
-
-                            }
-                            if (amounttobuy <= 0)
-                            {
-                                cout << "You cant buy less than one!";
-                                system("cls");
-                                checkout = 10;
-                                shopping = 0;
-                            }
-                            if (amounttobuy == amounttobuy)
-
-                                                            {
-                                if (sales == 2)
-                                {
-
-
-                                    cout << "Are you sure you want to buy " << amounttobuy << " of water?" << endl;
-                                }
-                                cin >> yesorno;
-                                if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
-                                {
-                                    wasser = wasser + amounttobuy;
-                                    cout << "You bought " << amounttobuy << " of " << sales << endl;
-                                    checkout = 10;
-
-                                }
-                            }
-                        }
-                    }
-                }
-
-                else
-                {
-                    cout << "You dont got enough money!";
-                }
-
-
-
-            }
-            if(GetKeyState('7') & 0x8000/*check if high-order bit is set (1 << 15)*/)
-            {
-                if (geld > 0)
-                {
-                    SetMyCursor(1,12);
-                    checkout = 2;
-                    {
-                        while (checkout == 2)
-                        {
-                            cout << "How much you wanna buy?" << endl;
-
-                            cin >> amounttobuy;
-
-                            if (amounttobuy > glassesinstock)
-                            {
-                                cout << "You cant buy more than " << glassesinstock << "!";
-                                system("cls");
-                                checkout = 10;
-                                shopping = 0;
-                            }
-                            if (amounttobuy <= 0)
-                            {
-                                cout << "You cant buy less than one!";
-                                system("cls");
-                                checkout = 10;
-                                shopping = 0;
-                            }
-                            if (sales =3)
-                            {
-                                    cout << "Are you sure you want to buy " << amounttobuy << " of glasses?" << endl;
-
-                                cin >> yesorno;
-                                if (yesorno == "Y" || yesorno == "y" || yesorno == "yes" || yesorno == "Yes")
-                                {
-                                    glasses = glasses + amounttobuy;
-                                    cout << "You bought " << amounttobuy << " of " << sales << endl;
-                                    checkout = 10;
-
-                                }
-                                 if (yesorno == "N" || yesorno == "n" || yesorno == "no" || yesorno == "No")
-                                {
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    cout << "You dont got enough money!";
-                }
-            }
-        }
-
-
-
-        getch();
-        if(GetKeyState('0') & 0x8000/*check if high-order bit is set (1 << 15)*/)
-        {
-            shopping = 0;
-            gamerunning = 1;
-            system("cls");
-            spielfeld();
         }
     }
+
+
+
+
+    getch();
+    if(GetKeyState('0') & 0x8000/*check if high-order bit is set (1 << 15)*/)
+    {
+        shopping = 0;
+        gamerunning = 1;
+        system("cls");
+        spielfeld();
+    }
+
 }
 void hotkeys ()
 {
@@ -605,49 +494,49 @@ void simulation()
             newant = 0;
             if (newant == 0)
             {
-            for (int i = 0; i < anz; i++)
-            {
-                zufallszahl = rand() %9 +1; //Hier  wird die Ameise zufällig bewegt.
-
-                if (zufallszahl == 1 && x[i] != 78 && y[i] !=22)
-                    BewegeAmeise(x[i], y[i], x[i]+1, y[i]+1);
-
-                if (zufallszahl == 2 && x[i] != 2 && y[i] != 2)
-                    BewegeAmeise(x[i], y[i], x[i]-1, y[i]-1);
-
-                if (zufallszahl == 3 && x[i] != 2)
-                    BewegeAmeise(x[i], y[i], x[i]-1, y[i]);
-
-                if (zufallszahl == 4 && y[i] != 2)
-                    BewegeAmeise(x[i], y[i], x[i], y[i]-1);
-
-                if (zufallszahl == 5 && x[i] != 78)
-                    BewegeAmeise(x[i], y[i], x[i]+1, y[i]);
-
-                if (zufallszahl == 6 && x[i] != 78 && y[i] != 2)
-                    BewegeAmeise(x[i], y[i], x[i]+1, y[i]-1);
-
-                if (zufallszahl == 7 && x[i] != 2 && y[i] != 22)
-                    BewegeAmeise(x[i], y[i], x[i]-1, y[i]+1);
-
-                if (zufallszahl == 8 && y[i] != 22)
-                    BewegeAmeise(x[i], y[i], x[i], y[i]+1);
-
-                if (zufallszahl == 9) {};
-
-                if (nahrung > 85)
+                for (int i = 0; i < anz; i++)
                 {
-                    bornant = rand() %200;
+                    zufallszahl = rand() %9 +1; //Hier  wird die Ameise zufällig bewegt.
 
-                    if (bornant == 1)
+                    if (zufallszahl == 1 && x[i] != 78 && y[i] !=22)
+                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]+1);
+
+                    if (zufallszahl == 2 && x[i] != 2 && y[i] != 2)
+                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]-1);
+
+                    if (zufallszahl == 3 && x[i] != 2)
+                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]);
+
+                    if (zufallszahl == 4 && y[i] != 2)
+                        BewegeAmeise(x[i], y[i], x[i], y[i]-1);
+
+                    if (zufallszahl == 5 && x[i] != 78)
+                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]);
+
+                    if (zufallszahl == 6 && x[i] != 78 && y[i] != 2)
+                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]-1);
+
+                    if (zufallszahl == 7 && x[i] != 2 && y[i] != 22)
+                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]+1);
+
+                    if (zufallszahl == 8 && y[i] != 22)
+                        BewegeAmeise(x[i], y[i], x[i], y[i]+1);
+
+                    if (zufallszahl == 9) {};
+
+                    if (nahrung > 85)
                     {
-                        anz++;
-                        newant =1;
-                        bornant =0;
-                    }
+                        bornant = rand() %200;
 
+                        if (bornant == 1)
+                        {
+                            anz++;
+                            newant =1;
+                            bornant =0;
+                        }
+
+                    }
                 }
-            }
             }
 
             /*
@@ -702,7 +591,7 @@ void start()
     cout << "|1. Start                                            |" << endl;
     cout << "|2. Ende                                             |" << endl;
     cout << "|3. Highscore                                        |" << endl;
-	cout << "|4. Check for updates (DEV BRANCH)                   |" << endl;
+    cout << "|4. Check for updates (DEV BRANCH)                   |" << endl;
     cout << "|____________________________________________________|" << endl;
 
     SetMyCursor(0,26);      //Text für untere Leiste
@@ -762,8 +651,8 @@ void start()
     }
     if (zahl == 4)          //Updates the program.
         system("start Updater.exe" ) ;
-        exit(0);
-    }
+    exit(0);
+}
 
 
 /*
