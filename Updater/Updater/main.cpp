@@ -16,13 +16,10 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 
 void UpdaterDownload()
 {
-
-std::ofstream outfile ("AmeisensimulationNeu.exe");
  CURL *curl;
-    FILE *fp;
+     FILE *fp;
     CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/bin/Release/Ameisensimulation.exe";
-    //char *url=    "https://wordpress.org/";
+    char *url= "https://cdn.rawgit.com/Juli199696/AntSimCPlusPlusLearning/dev/bin/Release/Ameisensimulation.exe";
     char outfilename[FILENAME_MAX] = "./Ameisensimulation.exe";
 
 
@@ -47,11 +44,10 @@ std::ofstream outfile ("AmeisensimulationNeu.exe");
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
 
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
-        outfile.close();
         fclose(fp);
 
     }
@@ -64,6 +60,5 @@ int main()
         UpdaterDownload();
         _sleep(1000);
         system("start Ameisensimulation.exe");
-        //remove( "AmeisensimulationNeu.exe" );
         return 0;
 }
