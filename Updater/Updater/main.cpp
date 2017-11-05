@@ -1,6 +1,11 @@
 #include <iostream>
 #include <curl/curl.h>
+#include <cstdlib>
+#include <sstream>
+#include <cstring>
+#include <fstream>
 using namespace std;
+
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
@@ -9,13 +14,14 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
     return written;
 }
 
-
 void UpdaterDownload()
 {
+
+std::ofstream outfile ("AmeisensimulationNeu.exe");
  CURL *curl;
     FILE *fp;
     CURLcode res;
-    char *url= "https://gaming-ftw.de/antsimupdates/Ameisensimulation.exe";
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/bin/Release/Ameisensimulation.exe";
     //char *url=    "https://wordpress.org/";
     char outfilename[FILENAME_MAX] = "./Ameisensimulation.exe";
 
@@ -45,20 +51,19 @@ void UpdaterDownload()
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
+        outfile.close();
+        fclose(fp);
 
     }
     cout << "Update complete";
-
 }
-
 
 int main()
 {
     cout << "Update in progress please wait!";
-
         UpdaterDownload();
         _sleep(1000);
-        system("cls");
-        system ("start Ameisensimulation.exe");
-        exit(0);
+        system("start Ameisensimulation.exe");
+        //remove( "AmeisensimulationNeu.exe" );
+        return 0;
 }

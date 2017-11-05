@@ -31,13 +31,14 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1509877537 source:c:\users\mrnope\documents\github\antsimcpluspluslearning\main.cpp
+1509882212 source:c:\users\mrnope\documents\github\antsimcpluspluslearning\main.cpp
 	<iostream>
 	<conio.h>
 	<windows.h>
 	<fstream>
 	<string>
 	<curl/curl.h>
+	<cstdlib>
 
 1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curl.h
 	"curlver.h"

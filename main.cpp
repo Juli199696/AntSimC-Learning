@@ -30,6 +30,7 @@ Changelog 15.10.2017:
 + Money money money! I have implemented a simple economy system but its not ready to use yet. You can use that money to buy new stuff from the shop or expand your current ant colony.
 + You can have highscores saved in text file!
 + I have added a game.cfg file which does not contain any usefull commands at the moment but will be handy to have later on.
++ UPDATER READY TO USE!!!
 
 # Changes to simulation itself (Add shop, add new variables for shop).
 # Highscore now can be watched every round without the game to be restarted.
@@ -691,7 +692,7 @@ void start()
 
     SetMyCursor(60,26);      //Text für untere Leiste
     {
-        cout << "Ant Sim. v. 1.2 Dev." ;
+        cout << "AntSimC++ Dev Ver. 1.2" ;
     }
     int zahl;
     SetMyCursor(1,10);
