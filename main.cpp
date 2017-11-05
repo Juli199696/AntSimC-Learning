@@ -341,16 +341,14 @@ void shop()
                                 cout << "You cant buy more than " << leavesinstock << "!";
                                 Sleep(2000);
                                 system("cls");
-                                checkout = 10;
-                                shopping = 0;
+
 
                             }
                             if (amounttobuy <= 0)
                             {
                                 cout << "You cant buy less than one!";
                                 system("cls");
-                                checkout = 10;
-                                shopping = 0;
+
                             }
                             else
                             {
@@ -362,7 +360,6 @@ void shop()
                             {
                                 nahrung = nahrung + amounttobuy;
                                 cout << "You bought " << amounttobuy << " of " << itemid << endl;
-                                checkout = 10;
 
                             }
                         }
