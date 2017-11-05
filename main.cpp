@@ -678,6 +678,7 @@ void start()
     cout << "|1. Start                                            |" << endl;
     cout << "|2. Ende                                             |" << endl;
     cout << "|3. Highscore                                        |" << endl;
+	cout << "|4. Check for updates (DEV BRANCH)                   |" << endl;
     cout << "|____________________________________________________|" << endl;
 
     SetMyCursor(60,26);      //Text für untere Leiste
