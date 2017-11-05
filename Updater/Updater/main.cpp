@@ -19,7 +19,7 @@ void UpdaterDownload()
  CURL *curl;
      FILE *fp;
     CURLcode res;
-    char *url= "https://cdn.rawgit.com/Juli199696/AntSimCPlusPlusLearning/dev/bin/Release/Ameisensimulation.exe";
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/bin/Release/Ameisensimulation.exe";
     char outfilename[FILENAME_MAX] = "./Ameisensimulation.exe";
 
 
