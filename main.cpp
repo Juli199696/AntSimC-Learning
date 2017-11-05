@@ -695,7 +695,7 @@ void start()
 
     SetMyCursor(1,26);      //Text für untere Leiste
     {
-        cout << "AntSim1C++ Dev Ver. 1.2" ;
+        cout << "TEST UPDATE HI SASU :D" ;
     }
     int zahl;
     SetMyCursor(1,10);
