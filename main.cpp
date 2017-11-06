@@ -632,14 +632,22 @@ ifstream versionabfrage ("version.cfg");
     {
         cout << "You already got the newest version of AntSim :) " << versionold;
         Sleep(4000);
+
     }
     else
+    {
+
+        ofstream cfgconfig;
+        cfgconfig.open ("version.cfg");
+        cfgconfig << "Version = " << versionold;
+        cfgconfig.close();
         cout << "Current version: " << versionold << endl;
         cout << "New update!" << endl;
         cout << "New version: " << versionneu;
         Sleep(4000);
     }
   }
+}
 
 /*
 ==============================================================================================================================
@@ -653,7 +661,6 @@ void start()
     cfgconfig.open ("version.cfg");
     cfgconfig << "Version = " << version;
     cfgconfig.close();
-    getch();
     UpdateCheck();
     system("cls");
     cout << " ____________________________________________________ " << endl;
