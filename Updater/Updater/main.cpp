@@ -160,6 +160,8 @@ int main()
         }
     else
         {
+            cout << "test";
+            Sleep(30000);
           UpdaterDownload();
         }
 
