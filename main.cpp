@@ -79,7 +79,8 @@ int ameisenmax;
 int gamerunning;
 int geld;
 float version = 1.6;
-char news;
+int news = 0;
+int checkupdates = 0;
 using namespace std;
 
 /*
@@ -447,7 +448,7 @@ void hotkeys ()
     }
     if(GetKeyState('4') & 0x8000/*check if high-order bit is set (1 << 15)*/)
     {
-        exit(0);
+        ende = 1;
 
     }
 }
@@ -571,6 +572,7 @@ void simulation()
     }
 }
 
+
 void UpdateCheck()
 {
 
@@ -596,7 +598,7 @@ ifstream version ("version.cfg");
 CURL *curl;
      FILE *fp;
     CURLcode res;
-    char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/bin/Release/version.cfg";
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/version.cfg";
     char outfilename[FILENAME_MAX] = "./version.cfg";
     curl = curl_easy_init();
     if (curl) {
@@ -631,12 +633,12 @@ ifstream versionabfrage ("version.cfg");
     if (versionold == versionneu)
     {
         cout << "You already got the newest version of AntSim :) " << versionold;
-        Sleep(4000);
+        Sleep(2000);
 
     }
     else
     {
-
+        news = 1;
         ofstream cfgconfig;
         cfgconfig.open ("version.cfg");
         cfgconfig << "Version = " << versionold;
@@ -644,7 +646,7 @@ ifstream versionabfrage ("version.cfg");
         cout << "Current version: " << versionold << endl;
         cout << "New update!" << endl;
         cout << "New version: " << versionneu;
-        Sleep(4000);
+        Sleep(2000);
     }
   }
 }
@@ -656,12 +658,56 @@ Startprogramm zum ausführen der Simulation.
 */
 void start()
 {
+if (checkupdates == 0)
+{
+
 
     ofstream cfgconfig;
     cfgconfig.open ("version.cfg");
     cfgconfig << "Version = " << version;
     cfgconfig.close();
     UpdateCheck();
+    if (news == 1)
+    {
+        if (system("ping -n 1 gaming-ftw.de")){
+          system("cls");
+          SetMyCursor(0,27);
+          cout<<"\nCan't check for News!\n\n";
+          Sleep(2000);
+  }
+  else{
+          system("cls");
+          SetMyCursor(0,27);
+          cout<<"\nCheck for News!\n\n";
+          Sleep(1000);
+
+        CURL *curl;
+     FILE *fp;
+    CURLcode res;
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/news.txt";
+    char outfilename[FILENAME_MAX] = "./news.txt";
+    curl = curl_easy_init();
+    if (curl) {
+        fp = fopen(outfilename,"wb");
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        /* Setup the https:// verification options - note we do this on all requests as there may
+           be a redirect from http to https and we still want to verify */
+        //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_easy_setopt(curl, CURLOPT_CAINFO, "./ca-bundle.crt");
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
+
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+        res = curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+        fclose(fp);
+
+    }
+  }
+  }
+}   checkupdates = 1;
     system("cls");
     cout << " ____________________________________________________ " << endl;
     cout << "|Willkommen zur Ameisen Simulation!                  |" << endl;
@@ -677,8 +723,19 @@ void start()
     SetMyCursor(0,26);      //Text für untere Leiste
     {
         cout << "AntSimC++ Dev "<< version << endl ;
-        cout << news;
     }
+    SetMyCursor(0,27);
+
+        string newsinfo;
+        ifstream news ("news.txt");
+        if (news.is_open())
+        {
+            while ( getline (news,newsinfo) )
+            {
+                cout << newsinfo << '\n';
+            }
+            news.close();
+        }
     int zahl;
     SetMyCursor(1,10);
     cin >> zahl;
@@ -727,7 +784,10 @@ void start()
             system("cls");
             start();
         }
-        else cout << "Unable to open file";
+        else cout << "No highscore yet!";
+        Sleep(3000);
+        start();
+
     }
     if (zahl == 4)          //Updates the program.
         system("start Updater.exe" ) ;
