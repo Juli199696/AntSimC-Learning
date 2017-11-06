@@ -80,7 +80,7 @@ ifstream version ("version.cfg");
 CURL *curl;
      FILE *fp;
     CURLcode res;
-    char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/bin/Release/version.cfg";
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/version.cfg";
     char outfilename[FILENAME_MAX] = "./version.cfg";
     curl = curl_easy_init();
     if (curl) {
