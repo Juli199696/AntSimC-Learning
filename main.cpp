@@ -653,6 +653,7 @@ void start()
     cfgconfig.open ("version.cfg");
     cfgconfig << "Version = " << version;
     cfgconfig.close();
+    getch();
     UpdateCheck();
     system("cls");
     cout << " ____________________________________________________ " << endl;
