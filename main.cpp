@@ -52,7 +52,7 @@ Changelog 15.10.2017:
 #include <curl/curl.h>
 #include <cstdlib>
 
-float version = 1.9;
+float version = 2.0;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
@@ -79,7 +79,7 @@ int ameisenmax;
 int gamerunning;
 int geld;
 
-int news = 0;
+int news = 1;
 int checkupdates = 0;
 using namespace std;
 
@@ -661,7 +661,7 @@ void start()
 if (checkupdates == 0)
 {
 
-
+    remove( "news.txt" );
     ofstream cfgconfig;
     cfgconfig.open ("version.cfg");
     cfgconfig << "Version = " << version;
@@ -674,6 +674,7 @@ if (checkupdates == 0)
           SetMyCursor(0,27);
           cout<<"\nCan't check for News!\n\n";
           Sleep(2000);
+          news = 0;
   }
   else{
           system("cls");
