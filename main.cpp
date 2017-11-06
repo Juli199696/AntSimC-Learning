@@ -52,7 +52,7 @@ Changelog 15.10.2017:
 #include <curl/curl.h>
 #include <cstdlib>
 
-
+float version = 1.8;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
@@ -78,7 +78,7 @@ int ende;
 int ameisenmax;
 int gamerunning;
 int geld;
-float version = 1.7;
+
 int news = 0;
 int checkupdates = 0;
 using namespace std;
