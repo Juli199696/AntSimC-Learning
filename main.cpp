@@ -1,4 +1,4 @@
-/* 02.04.2014 Ant Simulation version : 0.5 Dev  Autor: Julian Märtin
+/* 06.11.2017 Ant Simulation version : 2.1 Dev  Autor: Julian Märtin
 
 ==============================================================================================================================
 Allgemeine Programm Infos wie Changelog und vorhandene Funktionen.
@@ -52,7 +52,7 @@ Changelog 15.10.2017:
 #include <curl/curl.h>
 #include <cstdlib>
 
-float version = 2.0;
+float version = 2.1;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
