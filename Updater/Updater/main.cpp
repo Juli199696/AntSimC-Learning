@@ -24,17 +24,6 @@ void UpdaterDownload()
     CURLcode res;
     char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/bin/Release/Ameisensimulation.exe";
     char outfilename[FILENAME_MAX] = "./Ameisensimulation.exe";
-
-
-    curl_version_info_data * vinfo = curl_version_info(CURLVERSION_NOW);
-
-    if(vinfo->features & CURL_VERSION_SSL){
-        printf("CURL: SSL enabled\n");
-    }else{
-        printf("CURL: SSL not enabled\n");
-    }
-
-
     curl = curl_easy_init();
     if (curl) {
         fp = fopen(outfilename,"wb");
@@ -93,17 +82,6 @@ CURL *curl;
     CURLcode res;
     char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/bin/Release/version.cfg";
     char outfilename[FILENAME_MAX] = "./version.cfg";
-
-
-    curl_version_info_data * vinfo = curl_version_info(CURLVERSION_NOW);
-
-    if(vinfo->features & CURL_VERSION_SSL){
-        printf("CURL: SSL enabled\n");
-    }else{
-        printf("CURL: SSL not enabled\n");
-    }
-
-
     curl = curl_easy_init();
     if (curl) {
         fp = fopen(outfilename,"wb");

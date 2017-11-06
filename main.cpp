@@ -78,8 +78,8 @@ int ende;
 int ameisenmax;
 int gamerunning;
 int geld;
-float version = 1.5;
-
+float version = 1.6;
+char news;
 using namespace std;
 
 /*
@@ -571,6 +571,76 @@ void simulation()
     }
 }
 
+void UpdateCheck()
+{
+
+     if (system("ping -n 1 gaming-ftw.de")){
+          system("cls");
+          SetMyCursor(0,26);
+          cout<<"\nCan't check for updates!\n\n";
+  }
+  else{
+          system("cls");
+          SetMyCursor(0,26);
+          cout<<"\nCheck for Update!\n\n";
+
+string versionold;
+ifstream version ("version.cfg");
+    if (version.is_open())
+        {
+            while ( getline (version,versionold) )
+            {
+            }
+            version.close();
+        }
+CURL *curl;
+     FILE *fp;
+    CURLcode res;
+    char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/bin/Release/version.cfg";
+    char outfilename[FILENAME_MAX] = "./version.cfg";
+    curl = curl_easy_init();
+    if (curl) {
+        fp = fopen(outfilename,"wb");
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        /* Setup the https:// verification options - note we do this on all requests as there may
+           be a redirect from http to https and we still want to verify */
+        //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_easy_setopt(curl, CURLOPT_CAINFO, "./ca-bundle.crt");
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
+
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+        res = curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+        fclose(fp);
+
+    }
+
+string versionneu;
+
+ifstream versionabfrage ("version.cfg");
+    if (versionabfrage.is_open())
+        {
+            while ( getline (versionabfrage,versionneu) )
+            {
+            }
+            versionabfrage.close();
+        }
+    if (versionold == versionneu)
+    {
+        cout << "You already got the newest version of AntSim :) " << versionold;
+        Sleep(4000);
+    }
+    else
+        cout << "Current version: " << versionold << endl;
+        cout << "New update!" << endl;
+        cout << "New version: " << versionneu;
+        Sleep(4000);
+    }
+  }
+
 /*
 ==============================================================================================================================
 Startprogramm zum ausführen der Simulation.
@@ -578,11 +648,13 @@ Startprogramm zum ausführen der Simulation.
 */
 void start()
 {
+
     ofstream cfgconfig;
     cfgconfig.open ("version.cfg");
-    cfgconfig << "version = " << version;
+    cfgconfig << "Version = " << version;
     cfgconfig.close();
-
+    UpdateCheck();
+    system("cls");
     cout << " ____________________________________________________ " << endl;
     cout << "|Willkommen zur Ameisen Simulation!                  |" << endl;
     cout << "|Bitte waehle ein nummer.                            |" << endl;
@@ -597,7 +669,7 @@ void start()
     SetMyCursor(0,26);      //Text für untere Leiste
     {
         cout << "AntSimC++ Dev "<< version << endl ;
-        cout << "+Hotfix for the updater";
+        cout << news;
     }
     int zahl;
     SetMyCursor(1,10);
@@ -679,5 +751,6 @@ int main()
     SetConsoleWindowInfo(console, true, &windowSize);
 
     start();                //Führt das unterprogramm start aus
+
     return 0;
 }
