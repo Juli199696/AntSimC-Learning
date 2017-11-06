@@ -21,6 +21,9 @@ Spielfeld               : Baut / setzt den Spielfeld Rand und Objekte.
 Start                   : Ist für das Hauptmenu zuständig.
 Highscore               : Es ist nun möglich den Highscore vom letzten Spiel in einer Text Datei zu speichern und nachträglich wieder aufzurufen.
 
+Changelog 06.11.2017:
++Updater check version of AntSim.
+
 Changelog 15.10.2017:
 
 *Inital Commit on Github.
@@ -48,7 +51,8 @@ Changelog 15.10.2017:
 #include <string>
 #include <curl/curl.h>
 #include <cstdlib>
-//#include "global.h"
+
+
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
@@ -74,6 +78,7 @@ int ende;
 int ameisenmax;
 int gamerunning;
 int geld;
+float version = 1.5;
 
 using namespace std;
 
@@ -574,8 +579,8 @@ Startprogramm zum ausführen der Simulation.
 void start()
 {
     ofstream cfgconfig;
-    cfgconfig.open ("game.cfg");
-    cfgconfig << "test";
+    cfgconfig.open ("version.cfg");
+    cfgconfig << "version = " << version;
     cfgconfig.close();
 
     cout << " ____________________________________________________ " << endl;
@@ -591,7 +596,7 @@ void start()
 
     SetMyCursor(0,26);      //Text für untere Leiste
     {
-        cout << "AntSimC++ Dev 1.3" << endl ;
+        cout << "AntSimC++ Dev "<< version << endl ;
         cout << "+Hotfix for the updater";
     }
     int zahl;
@@ -629,13 +634,13 @@ void start()
     if (zahl == 3)          //Highscore
     {
         system("cls");
-        string line;
+        string points;
         ifstream score ("score.txt");
         if (score.is_open())
         {
-            while ( getline (score,line) )
+            while ( getline (score,points) )
             {
-                cout << line << '\n';
+                cout << points << '\n';
             }
             score.close();
             getch();
