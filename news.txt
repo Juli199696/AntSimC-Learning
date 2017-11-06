@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 Last test for today. 06.11.17 23:53.
+=======
+Last test for today. 06.11.17 23:53./n
+Good night
+>>>>>>> 1c0f33bf76347b33e71a43bf781258f4e0ceba19
