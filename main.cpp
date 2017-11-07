@@ -715,7 +715,7 @@ void UpdateCheck()
         cfgconfig.close();
         cout << "Current version: " << versionold << endl;
         cout << "New update!" << endl;
-        cout << "New version: " << versionneu;
+        cout << "New version: " << versionneu << endl;
         Sleep(2000);
     }
 
@@ -729,7 +729,7 @@ void UpdateCheck()
     }
     if (patcherold == patchernew)
     {
-        cout << "Updater v. " << patcherold;
+        cout << "Updater v. " << patcherold << endl;
         Sleep(2000);
 
     }
