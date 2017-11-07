@@ -52,7 +52,8 @@ Changelog 15.10.2017:
 #include <curl/curl.h>
 #include <cstdlib>
 
-float version = 2.1;
+float version = 2.2;
+float updater = 1.1;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
@@ -278,7 +279,7 @@ void Nachrichten()
         cout << "                                                    ";
     }
 }
-
+//Commands for shopping
 int buyMaterial(int currentAmount, int inStock, string materialName)
 {
     int amounttobuy = 0;
@@ -313,7 +314,7 @@ int buyMaterial(int currentAmount, int inStock, string materialName)
 
     return newAmount;
 }
-//Befehle
+//Shop instance
 void shop()
 {
     int leavesinstock = rand()%(25-1 + 1) + 1;
@@ -378,7 +379,7 @@ void shop()
             SetMyCursor(1,12);
             glasses = buyMaterial(glasses, glassesinstock, "Lupe");
         }
-getch();
+        getch();
 
         if(GetKeyState('0') & 0x8000/*check if high-order bit is set (1 << 15)*/)
         {
@@ -392,7 +393,7 @@ getch();
 
 
 }
-
+//Menu usage with keys
 void hotkeys ()
 {
     if(GetKeyState('1') & 0x8000/*check if high-order bit is set (1 << 15)*/)
@@ -572,36 +573,23 @@ void simulation()
     }
 }
 
-
-void UpdateCheck()
+// Check for News
+void NewsCheck()
 {
+    remove( "news.txt" );
+    system("cls");
+    SetMyCursor(0,27);
+    cout<<"\nCheck for News!\n\n";
+    Sleep(1000);
 
-     if (system("ping -n 1 gaming-ftw.de")){
-          system("cls");
-          SetMyCursor(0,26);
-          cout<<"\nCan't check for updates!\n\n";
-  }
-  else{
-          system("cls");
-          SetMyCursor(0,26);
-          cout<<"\nCheck for Update!\n\n";
-
-string versionold;
-ifstream version ("version.cfg");
-    if (version.is_open())
-        {
-            while ( getline (version,versionold) )
-            {
-            }
-            version.close();
-        }
-CURL *curl;
-     FILE *fp;
+    CURL *curl;
+    FILE *fp;
     CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/version.cfg";
-    char outfilename[FILENAME_MAX] = "./version.cfg";
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/news.txt";
+    char outfilename[FILENAME_MAX] = "./news.txt";
     curl = curl_easy_init();
-    if (curl) {
+    if (curl)
+    {
         fp = fopen(outfilename,"wb");
         curl_easy_setopt(curl, CURLOPT_URL, url);
         /* Setup the https:// verification options - note we do this on all requests as there may
@@ -619,26 +607,108 @@ CURL *curl;
         fclose(fp);
 
     }
+}
 
-string versionneu;
+void UpdateCheck()
+{
 
-ifstream versionabfrage ("version.cfg");
-    if (versionabfrage.is_open())
+    ofstream cfgconfig;
+    cfgconfig.open ("version.cfg");
+    cfgconfig << "Version = " << version;
+    cfgconfig.close();
+
+    ofstream patcherconfig;
+    patcherconfig.open ("patcher.cfg");
+    patcherconfig << "Updater = " << updater;
+    patcherconfig.close();
+
+    string patcherold;
+    string versionold;
+    ifstream version ("version.cfg");
+    if (version.is_open())
+    {
+        while ( getline (version,versionold) )
         {
-            while ( getline (versionabfrage,versionneu) )
-            {
-            }
-            versionabfrage.close();
         }
+        version.close();
+    }
+    CURL *curl;
+    FILE *fp;
+    CURLcode res;
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/version.cfg";
+    char outfilename[FILENAME_MAX] = "./version.cfg";
+    curl = curl_easy_init();
+    if (curl)
+    {
+        fp = fopen(outfilename,"wb");
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        /* Setup the https:// verification options - note we do this on all requests as there may
+           be a redirect from http to https and we still want to verify */
+        //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_easy_setopt(curl, CURLOPT_CAINFO, "./ca-bundle.crt");
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
+
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+        res = curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+        fclose(fp);
+
+    }
+    ifstream patcher ("patcher.cfg");
+    if (patcher.is_open())
+    {
+        while ( getline (patcher,patcherold) )
+        {
+        }
+        patcher.close();
+    }
+    CURL *dpatcher;
+    FILE *dfp;
+    CURLcode dres;
+    char *durl= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/patcher.cfg";
+    char doutfilename[FILENAME_MAX] = "./patcher.cfg";
+    dpatcher = curl_easy_init();
+    if (dpatcher)
+    {
+        dfp = fopen(doutfilename,"wb");
+        curl_easy_setopt(dpatcher, CURLOPT_URL, durl);
+        /* Setup the https:// verification options - note we do this on all requests as there may
+           be a redirect from http to https and we still want to verify */
+        //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_easy_setopt(dpatcher, CURLOPT_CAINFO, "./ca-bundle.crt");
+        curl_easy_setopt(dpatcher, CURLOPT_SSL_VERIFYPEER, false);
+        curl_easy_setopt(dpatcher, CURLOPT_SSL_VERIFYHOST, false);
+
+        curl_easy_setopt(dpatcher, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(dpatcher, CURLOPT_FOLLOWLOCATION, 1);
+        curl_easy_setopt(dpatcher, CURLOPT_WRITEDATA, dfp);
+        dres = curl_easy_perform(dpatcher);
+        curl_easy_cleanup(dpatcher);
+        fclose(dfp);
+
+    }
+
+    string versionneu;
+    string patchernew;
+    ifstream versionabfrage ("version.cfg");
+    if (versionabfrage.is_open())
+    {
+        while ( getline (versionabfrage,versionneu) )
+        {
+        }
+        versionabfrage.close();
+    }
     if (versionold == versionneu)
     {
-        cout << "You already got the newest version of AntSim :) " << versionold;
+        cout << "You already got the newest version of AntSim :) " << versionold <<endl;
         Sleep(2000);
 
     }
     else
     {
-        news = 1;
         ofstream cfgconfig;
         cfgconfig.open ("version.cfg");
         cfgconfig << versionold;
@@ -648,7 +718,75 @@ ifstream versionabfrage ("version.cfg");
         cout << "New version: " << versionneu;
         Sleep(2000);
     }
-  }
+
+    ifstream patchercheck ("patcher.cfg");
+    if (patchercheck.is_open())
+    {
+        while ( getline (patchercheck,patchernew) )
+        {
+        }
+        patchercheck.close();
+    }
+    if (patcherold == patchernew)
+    {
+        cout << "Updater v. " << patcherold;
+        Sleep(2000);
+
+    }
+    else
+    {
+        ofstream patcherconfig;
+        patcherconfig.open ("patcher.cfg");
+        patcherconfig << patcherold;
+        patcherconfig.close();
+        cout << "Updater v. " << patcherold << endl;
+        cout << "New update!" << endl;
+        cout << "New updater v. " << patchernew << endl;
+        cout << "Updating!" << endl;
+        Sleep(3000);
+        CURL *curl;
+        cout << "1%"<< endl;
+        Sleep(500);
+        FILE *fp;
+        cout << "12%"<< endl;
+        Sleep(500);
+        CURLcode res;
+        cout << "24%"<< endl;
+        Sleep(500);
+        char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/Updater/Updater/bin/Release/Updater.exe";
+        char outfilename[FILENAME_MAX] = "./Updater.exe";
+        cout << "34%"<< endl;
+        Sleep(500);
+        curl = curl_easy_init();
+        if (curl)
+        {
+            fp = fopen(outfilename,"wb");
+            cout << "45%"<< endl;
+            Sleep(500);
+            curl_easy_setopt(curl, CURLOPT_URL, url);
+            /* Setup the https:// verification options - note we do this on all requests as there may
+               be a redirect from http to https and we still want to verify */
+            //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
+            curl_easy_setopt(curl, CURLOPT_CAINFO, "./ca-bundle.crt");
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
+            cout << "69%"<< endl;
+            Sleep(500);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+            curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+            cout << "78%"<< endl;
+            Sleep(500);
+            res = curl_easy_perform(curl);
+            curl_easy_cleanup(curl);
+            cout << "90%"<< endl;
+            Sleep(500);
+            fclose(fp);
+            cout << "Update complete! :)"<< endl;
+            Sleep(3000);
+
+        }
+    }
 }
 
 /*
@@ -658,57 +796,30 @@ Startprogramm zum ausführen der Simulation.
 */
 void start()
 {
-if (checkupdates == 0)
-{
-
-    remove( "news.txt" );
-    ofstream cfgconfig;
-    cfgconfig.open ("version.cfg");
-    cfgconfig << "Version = " << version;
-    cfgconfig.close();
-    UpdateCheck();
-    if (news == 1)
+    if (checkupdates == 0)
     {
-        if (system("ping -n 1 gaming-ftw.de")){
-          system("cls");
-          SetMyCursor(0,27);
-          cout<<"\nCan't check for News!\n\n";
-          Sleep(2000);
-          news = 0;
-  }
-  else{
-          system("cls");
-          SetMyCursor(0,27);
-          cout<<"\nCheck for News!\n\n";
-          Sleep(1000);
+        if (system("ping -n 1 gaming-ftw.de"))
+        {
+            system("cls");
+            SetMyCursor(0,26);
+            cout<<"\nCan't check for updates!\n\n";
+            checkupdates = 1;
 
-        CURL *curl;
-     FILE *fp;
-    CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/news.txt";
-    char outfilename[FILENAME_MAX] = "./news.txt";
-    curl = curl_easy_init();
-    if (curl) {
-        fp = fopen(outfilename,"wb");
-        curl_easy_setopt(curl, CURLOPT_URL, url);
-        /* Setup the https:// verification options - note we do this on all requests as there may
-           be a redirect from http to https and we still want to verify */
-        //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_easy_setopt(curl, CURLOPT_CAINFO, "./ca-bundle.crt");
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
+        }
+        else
+        {
+            system("cls");
+            SetMyCursor(0,26);
+            cout<<"\nCheck for Update!\n\n";
+            UpdateCheck();
+            NewsCheck();
 
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-        res = curl_easy_perform(curl);
-        curl_easy_cleanup(curl);
-        fclose(fp);
 
+        }
     }
-  }
-  }
-}   checkupdates = 1;
+
+
+    checkupdates = 1;
     system("cls");
     cout << " ____________________________________________________ " << endl;
     cout << "|Willkommen zur Ameisen Simulation!                  |" << endl;
@@ -727,16 +838,16 @@ if (checkupdates == 0)
     }
     SetMyCursor(0,27);
 
-        string newsinfo;
-        ifstream news ("news.txt");
-        if (news.is_open())
+    string newsinfo;
+    ifstream news ("news.txt");
+    if (news.is_open())
+    {
+        while ( getline (news,newsinfo) )
         {
-            while ( getline (news,newsinfo) )
-            {
-                cout << newsinfo << '\n';
-            }
-            news.close();
+            cout << newsinfo << '\n';
         }
+        news.close();
+    }
     int zahl;
     SetMyCursor(1,10);
     cin >> zahl;
@@ -806,13 +917,10 @@ int main()
     HANDLE console;                                         //Dient zur vergrößerung des Consolen Fensters
     COORD screenBufferSize;
     SMALL_RECT windowSize;
-
     console = GetStdHandle(STD_OUTPUT_HANDLE);
-
     screenBufferSize.X = 81;
     screenBufferSize.Y = 29;
     SetConsoleScreenBufferSize(console, screenBufferSize);
-
     windowSize.Left = 0;
     windowSize.Top = 0;
     windowSize.Right = 80;
