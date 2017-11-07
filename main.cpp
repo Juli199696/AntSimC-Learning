@@ -53,7 +53,7 @@ Changelog 15.10.2017:
 #include <cstdlib>
 
 float version = 2.2;
-float updater = 1.1;
+float updater = 1.2;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
@@ -729,7 +729,7 @@ void UpdateCheck()
     }
     if (patcherold == patchernew)
     {
-        cout << "Updater v. " << patcherold << endl;
+        cout << "Updater v. " << patcherold;
         Sleep(2000);
 
     }
@@ -740,7 +740,6 @@ void UpdateCheck()
         patcherconfig << patcherold;
         patcherconfig.close();
         cout << "Updater v. " << patcherold << endl;
-        cout << "New update!" << endl;
         cout << "New updater v. " << patchernew << endl;
         cout << "Updating!" << endl;
         Sleep(3000);
