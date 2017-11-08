@@ -52,7 +52,7 @@ Changelog 15.10.2017:
 #include <curl/curl.h>
 #include <cstdlib>
 
-float version = 2.2;
+float version = 2.3;
 float updater = 1.2;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
