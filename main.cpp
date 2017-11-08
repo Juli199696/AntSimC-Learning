@@ -10,13 +10,13 @@ Deleted functions | -
 
 Vorhandene Funktionen:
 -------------------------------------------------------------------------------------------------------------------------------
-Ameisensterben          : Ameisen können sterben wenn Sie zu wenig leaves/ water haben.
-BewegeAmeise            : Ameisen werden zufällig bewegt.
+antssterben          : ants können sterben wenn Sie zu wenig leaves/ water haben.
+BewegeAmeise            : ants werden zufällig bewegt.
 Lebensmittel            : Ist für den verbrauch und das hinzufügen von Lebensmitteln wie leaves und water zuständig.
 Main                    : Startet das Grundprogramm.
 Nachrichten             : News System informiert über aktuelle geschehnisse.
 SetMyCurser             : Ist für das Setzten des Cursers in der Console verantwortlich und kann jederzeit verändert werden.
-Simulation              : Lässt die Zeit laufen und ist mit für die Bewegung der Ameisen zuständig.
+Simulation              : Lässt die Zeit laufen und ist mit für die Bewegung der ants zuständig.
 Spielfeld               : Baut / setzt den Spielfeld Rand und Objekte.
 Start                   : Ist für das Hauptmenu zuständig.
 Highscore               : Es ist nun möglich den Highscore vom letzten Spiel in einer Text Datei zu speichern und nachträglich wieder aufzurufen.
@@ -65,10 +65,10 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 int water;
 int leaves;
 int glasses;
-int anz;
-int newant;           //Anzahl der Ameisen Random
+int ant;
+int newant;           //antahl der ants Random
 int happy;
-int tot;
+int dead;
 int bornant;
 int regen;
 int sonne;
@@ -76,19 +76,15 @@ int sturm;
 int blaetter;
 int angreifer;
 int ende;
-int ameisenmax;
+int antsmax;
 int gamerunning;
 int geld;
-
+int days;
+int life;
 int news = 1;
 int checkupdates = 0;
 using namespace std;
 
-/*
-==============================================================================================================================
-Setzt die Position des Cursers um Zeichen zu setzen.
-==============================================================================================================================
-*/
 void SetMyCursor(short x, short y)
 {
     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -97,15 +93,217 @@ void SetMyCursor(short x, short y)
     pos.Y = y;
     SetConsoleCursorPosition(hStdOut,pos);
 }
+
+class Ant
+{
+private:
+public:
+
+
+
+void spawnant()
+{
+    life = 1;
+    cout << "test";
+    getch();
+    int x[ant];
+    int y[ant];
+    int i =0;
+    char ants[ant];
+    for (i = 0; i < ant; i++)  //ants werden hinzugefügt
+    {
+        ants[i] = '*';
+    }
+}
+};
+    /*
+==============================================================================================================================
+ants sterben
+==============================================================================================================================
+*/
+class killant
+{
+    private:
+    public:
+
+    void antdie()
+    {
+
+
+    if (leaves < 10)
+    {
+        dead = rand() %10 +1;
+
+        if (dead == 1)
+        {
+            if (ant > 0)
+            {
+                life = 0;
+            }
+        }
+    }
+    if (water < 10)
+    {
+        dead = rand() %10 +1;
+
+        if (dead == 1)
+        {
+            if (ant > 0)
+            {
+                ant--;
+            }
+        }
+    }
+}
+};
+/*
+==============================================================================================================================
+Lebensmittel verbrauch
+==============================================================================================================================
+*/
+class goods
+{
+void food()
+{
+    int verbrauch ;
+    killant();
+    SetMyCursor(2,24);
+    {
+        cout << "water:" << water << "%";
+        cout  << "  ";
+    }
+    /* Ich hab keine Ahnung mehr wofür ich die kacke gebraucht habe.. Meh
+    int x[ant];
+    int y[ant];
+    char ants[ant];
+    SetMyCursor(15,24);
+    */
+
+    {
+        cout << "leaves:" << leaves << "%";
+        cout  << "  ";
+    }
+    verbrauch = rand() %55 +1;
+    if (verbrauch == 1)
+    {
+        if (leaves > 0)
+        {
+            leaves--;
+        }
+    }
+    if (verbrauch == 2)
+    {
+        if (water > 0)
+        {
+            water--;
+        }
+    }
+}
+
+};
+
+class moveants
+{
+    /*
+==============================================================================================================================
+ants Position wird übergeben und neu "geschrieben".
+==============================================================================================================================
+*/
+void BewegeAmeise(int& altPosX, int& altPosY,int neuPosX, int neuPosY)   //Bei & wird findet eine übergabe statt
+    {
+
+        SetMyCursor (altPosX, altPosY);        //altePos löschen
+        cout << " ";
+        SetMyCursor (neuPosX, neuPosY);        //Cursor neu plazieren...
+        cout << "*";                      // ...und neu schreiben
+        altPosX = neuPosX;
+        altPosY = neuPosY;
+    }
+    void moveant()
+    {
+    for ( int zeit = 1; zeit++;)
+        {
+
+            SetMyCursor(40,24);
+            {
+                cout << "ants:" << ant;
+                cout  << "  ";
+            }
+            int zufallszahl;
+            SetMyCursor(29,24);
+            {
+                cout << "Tage:" << zeit;
+                Sleep(100);
+                cout  << "  ";
+            }
+            newant = 0;
+            if (newant == 0)
+            {
+                char ants[ant];
+                int x[ant];
+                int y[ant];
+
+                for (int i = 0; i < ant; i++)
+                {
+                    zufallszahl = rand() %9 +1; //Hier  wird die Ameise zufällig bewegt.
+
+                    if (zufallszahl == 1 && x[i] != 78 && y[i] !=22)
+                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]+1);
+
+                    if (zufallszahl == 2 && x[i] != 2 && y[i] != 2)
+                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]-1);
+
+                    if (zufallszahl == 3 && x[i] != 2)
+                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]);
+
+                    if (zufallszahl == 4 && y[i] != 2)
+                        BewegeAmeise(x[i], y[i], x[i], y[i]-1);
+
+                    if (zufallszahl == 5 && x[i] != 78)
+                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]);
+
+                    if (zufallszahl == 6 && x[i] != 78 && y[i] != 2)
+                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]-1);
+
+                    if (zufallszahl == 7 && x[i] != 2 && y[i] != 22)
+                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]+1);
+
+                    if (zufallszahl == 8 && y[i] != 22)
+                        BewegeAmeise(x[i], y[i], x[i], y[i]+1);
+
+                    if (zufallszahl == 9) {};
+
+                    /*if (leaves > 85)
+                    {
+                        bornant = rand() %200;
+
+                        if (bornant == 1)
+                        {
+                            ant++;
+                            newant =1;
+                            bornant =0;
+                        }
+
+                    }*/
+                }
+            }
+}
+}
+};
+/*
+==============================================================================================================================
+Setzt die Position des Cursers um Zeichen zu setzen.
+==============================================================================================================================
+*/
+
 /*
 ==============================================================================================================================
 Spielfeld wird erstellt.
 ==============================================================================================================================
 */
-void spielfeld()
+void gamefield()
 {
-    SetMyCursor(1,23);      // Setzt die Untermenü Linie
-    {
+        SetMyCursor(1,23);      // Setzt die Untermenü Linie
         for (int i=0; i<79; i++)
         {
             cout << (char)205 ;
@@ -132,98 +330,12 @@ void spielfeld()
         SetMyCursor(79,23);      //Setzt untere rechte Ecke ╝
         cout << (char)188 ;
     }
-}
+
+
+
 /*
 ==============================================================================================================================
-Ameisen Position wird übergeben und neu "geschrieben".
-==============================================================================================================================
-*/
-void BewegeAmeise(int& altPosX, int& altPosY,int neuPosX, int neuPosY)   //Bei & wird findet eine übergabe statt
-{
-
-    SetMyCursor (altPosX, altPosY);        //altePos löschen
-    cout << " ";
-    SetMyCursor (neuPosX, neuPosY);        //Cursor neu plazieren...
-    cout << "*";                      // ...und neu schreiben
-    altPosX = neuPosX;
-    altPosY = neuPosY;
-}
-/*
-==============================================================================================================================
-Ameisen sterben
-==============================================================================================================================
-*/
-void Ameisensterben()
-{
-    if (leaves < 10)
-    {
-        tot = rand() %10 +1;
-
-        if (tot == 1)
-        {
-            if (anz > 0)
-            {
-                anz--;
-            }
-        }
-    }
-    if (water < 10)
-    {
-        tot = rand() %10 +1;
-
-        if (tot == 1)
-        {
-            if (anz > 0)
-            {
-                anz--;
-            }
-        }
-    }
-}
-/*
-==============================================================================================================================
-Lebensmittel verbrauch
-==============================================================================================================================
-*/
-void Lebensmittel()
-{
-    int verbrauch ;
-    Ameisensterben();
-    SetMyCursor(2,24);
-    {
-        cout << "water:" << water << "%";
-        cout  << "  ";
-    }
-    /* Ich hab keine Ahnung mehr wofür ich die kacke gebraucht habe.. Meh
-    int x[anz];
-    int y[anz];
-    char ameisen[anz];
-    SetMyCursor(15,24);
-    */
-
-    {
-        cout << "leaves:" << leaves << "%";
-        cout  << "  ";
-    }
-    verbrauch = rand() %55 +1;
-    if (verbrauch == 1)
-    {
-        if (leaves > 0)
-        {
-            leaves--;
-        }
-    }
-    if (verbrauch == 2)
-    {
-        if (water > 0)
-        {
-            water--;
-        }
-    }
-}
-/*
-==============================================================================================================================
-Nachrichten / Ameisen Informationen
+Nachrichten / ants Informationen
 ==============================================================================================================================
 */
 void Nachrichten()
@@ -386,7 +498,7 @@ void shop()
             shopping = 0;
             gamerunning = 1;
             system("cls");
-            spielfeld();
+            gamefield();
         }
 
     }
@@ -405,7 +517,7 @@ void hotkeys ()
             SetMyCursor(0,1);
             {
                 cout << "Ants Info" << endl << endl << "Here you can see how your ants are feeling and what they need!" << endl << "Please check here regulary for happy ants." << endl;
-                cout << "Your colony have " << anz <<" ants." << endl << endl << "You got " << leaves << " food." << endl << "You got " << water << " water." << endl;
+                cout << "Your colony have " << ant <<" ants." << endl << endl << "You got " << leaves << " food." << endl << "You got " << water << " water." << endl;
                 if (happy == 3)
                 {
                     cout << "Your ants are very happy." << endl << "Good job!";
@@ -432,7 +544,7 @@ void hotkeys ()
             {
                 gamerunning = 1;
                 system("cls");
-                spielfeld();
+                gamefield();
             }
 
         }
@@ -455,108 +567,37 @@ void hotkeys ()
 }
 /*
 ==============================================================================================================================
-Ameisen bewegung und grundfunktionen
+ants bewegung und grundfunktionen
 ==============================================================================================================================
 */
 void simulation()
 {
-    srand (time(NULL));
-    int x[anz];
-    int y[anz];
-    int i =0;
-    char ameisen[anz];
-    //const int anz = 5; //Anzahl der Ameisen
 
-    for (i = 0; i < anz; i++)  //Ameisen werden hinzugefügt
-    {
-        ameisen[i] = '*';
-        x[i] = rand()%77+2;     //Ameisen Spawn
-        y[i] = rand()%21+2;
-    }
     while (ende == 0) //Solange das Spiel nicht beendet ist, führe das aus.
     {
+        Ant(spawnant());
+        moveants(BewegeAmeise());
+        hotkeys ();
+        Nachrichten();
 
-        for ( int zeit = 1; zeit++;)
-        {
-            hotkeys ();
-            Lebensmittel();
-            Nachrichten();
-            SetMyCursor(40,24);
-            {
-                cout << "Ameisen:" << anz;
-                cout  << "  ";
-            }
-            int zufallszahl;
-            SetMyCursor(29,24);
-            {
-                cout << "Tage:" << zeit;
-                Sleep(100);
-                cout  << "  ";
-            }
-            newant = 0;
-            if (newant == 0)
-            {
-                for (int i = 0; i < anz; i++)
-                {
-                    zufallszahl = rand() %9 +1; //Hier  wird die Ameise zufällig bewegt.
 
-                    if (zufallszahl == 1 && x[i] != 78 && y[i] !=22)
-                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]+1);
-
-                    if (zufallszahl == 2 && x[i] != 2 && y[i] != 2)
-                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]-1);
-
-                    if (zufallszahl == 3 && x[i] != 2)
-                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]);
-
-                    if (zufallszahl == 4 && y[i] != 2)
-                        BewegeAmeise(x[i], y[i], x[i], y[i]-1);
-
-                    if (zufallszahl == 5 && x[i] != 78)
-                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]);
-
-                    if (zufallszahl == 6 && x[i] != 78 && y[i] != 2)
-                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]-1);
-
-                    if (zufallszahl == 7 && x[i] != 2 && y[i] != 22)
-                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]+1);
-
-                    if (zufallszahl == 8 && y[i] != 22)
-                        BewegeAmeise(x[i], y[i], x[i], y[i]+1);
-
-                    if (zufallszahl == 9) {};
-
-                    /*if (leaves > 85)
-                    {
-                        bornant = rand() %200;
-
-                        if (bornant == 1)
-                        {
-                            anz++;
-                            newant =1;
-                            bornant =0;
-                        }
-
-                    }*/
-                }
-            }
 
             /*
             ==============================================================================================================================
             Spielende
             ==============================================================================================================================
             */
-            if  (anz == 0)
+            if  (ant == 0)
             {
                 SetMyCursor(0,5);
                 {
                     Sleep(2000);
                     system("cls");
-                    cout << "GAME OVER" << endl << "You archived " << zeit << " days." << endl << "You got " << leaves << " food and " << water << " water." << endl << "Your farm reached " << anz << " ants.";
+                    cout << "GAME OVER" << endl << "You archived " << days << " days." << endl << "You got " << leaves << " food and " << water << " water." << endl << "Your farm reached " << ant << " ants.";
                     Sleep(5000);
                     ofstream score;
                     score.open ("score.txt");
-                    score << "You archived " << zeit << " days." << endl << "You got " << leaves << " food and " << water << " water." << endl << "Your farm reached " << anz << " ants.";
+                    score << "You archived " << days << " days." << endl << "You got " << leaves << " food and " << water << " water." << endl << "Your farm reached " << ant << " ants.";
                     score.close();
                     system("cls");
                     ende = 1;
@@ -571,7 +612,7 @@ void simulation()
             }
         }
     }
-}
+
 
 // Check for News
 void NewsCheck()
@@ -821,7 +862,7 @@ void start()
     checkupdates = 1;
     system("cls");
     cout << " ____________________________________________________ " << endl;
-    cout << "|Willkommen zur Ameisen Simulation!                  |" << endl;
+    cout << "|Willkommen zur ants Simulation!                  |" << endl;
     cout << "|Bitte waehle ein nummer.                            |" << endl;
     cout << "|____________________________________________________|" << endl;           //Start Menü
     cout << "|                                                    |" << endl;
@@ -855,10 +896,10 @@ void start()
         water = 50;
         leaves = 50;
         glasses = 0;
-        anz = rand()%50+3;
-        newant = 0;            //Anzahl der Ameisen Random
+        ant = rand()%50+3;
+        newant = 0;            //antahl der ants Random
         happy = 1;
-        tot = 0;
+        dead = 0;
         bornant = 0;
         regen = 0;
         sonne = 0;
@@ -866,14 +907,14 @@ void start()
         blaetter = 0;
         angreifer = 0;
         ende = 0;
-        ameisenmax = 0;
+        antsmax = 0;
         gamerunning = 1;
         geld = 50;
 
         system("cls");
-        spielfeld();
+        gamefield();
         simulation();
-    }
+        }
     if (zahl == 2)          //Bedingung für ausführung der Schleife 2, beendet das Programm
     {
         exit(0);
