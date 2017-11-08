@@ -74,3 +74,46 @@
 
 1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\typecheck-gcc.h
 
+1510180340 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\main.cpp
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<curl/curl.h>
+	<cstdlib>
+
+1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\curl.h
+	"curlver.h"
+	"curlbuild.h"
+	"curlrules.h"
+	<stdio.h>
+	<limits.h>
+	<osreldate.h>
+	<sys/types.h>
+	<time.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<sys/select.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<support/SupportDefs.h>
+	"easy.h"
+	"multi.h"
+	"typecheck-gcc.h"
+
+1415172362 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\curlver.h
+
+1415172362 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\curlbuild.h
+	<sys/types.h>
+	<sys/socket.h>
+
+1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\curlrules.h
+
+1402512750 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\easy.h
+
+1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\multi.h
+	"curl.h"
+
+1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\typecheck-gcc.h
+

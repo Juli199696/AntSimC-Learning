@@ -11,7 +11,7 @@ Deleted functions | -
 Vorhandene Funktionen:
 -------------------------------------------------------------------------------------------------------------------------------
 antssterben          : ants können sterben wenn Sie zu wenig leaves/ water haben.
-BewegeAmeise            : ants werden zufällig bewegt.
+moveants            : ants werden zufällig bewegt.
 Lebensmittel            : Ist für den verbrauch und das hinzufügen von Lebensmitteln wie leaves und water zuständig.
 Main                    : Startet das Grundprogramm.
 Nachrichten             : News System informiert über aktuelle geschehnisse.
@@ -94,28 +94,29 @@ void SetMyCursor(short x, short y)
     SetConsoleCursorPosition(hStdOut,pos);
 }
 
-class Ant
-{
-private:
-public:
-
-
 
 void spawnant()
 {
-    life = 1;
-    cout << "test";
-    getch();
+
+    srand (time(NULL));
+    //const int ant = 5; //antahl der Ameisen
+    int ant = rand()%20+1; //antahl der Ameisen Random
+    char ants[ant];
     int x[ant];
     int y[ant];
-    int i =0;
-    char ants[ant];
-    for (i = 0; i < ant; i++)  //ants werden hinzugefügt
+    SetMyCursor(40,24);
+    {
+        cout << "Ants:" << ant;
+        cout  << "  ";
+    }
+    for (int i = 0; i < ant; i++)  //Ameisen werden hinzugefügt
     {
         ants[i] = '*';
+        x[i] = rand()%77+2;     //Ameisen Spawn
+        y[i] = rand()%21+2;     //
     }
 }
-};
+
     /*
 ==============================================================================================================================
 ants sterben
@@ -202,94 +203,71 @@ void food()
 
 };
 
-class moveants
-{
-    /*
+   /*
 ==============================================================================================================================
 ants Position wird übergeben und neu "geschrieben".
 ==============================================================================================================================
 */
-void BewegeAmeise(int& altPosX, int& altPosY,int neuPosX, int neuPosY)   //Bei & wird findet eine übergabe statt
-    {
+void BewegeAmeise(int& altPosX, int& altPosY,int neuPosX, int neuPosY)  //Bei & wird findet eine übergabe statt
+{
+    SetMyCursor (altPosX, altPosY);        //altePos löschen
+    cout << " ";
 
-        SetMyCursor (altPosX, altPosY);        //altePos löschen
-        cout << " ";
-        SetMyCursor (neuPosX, neuPosY);        //Cursor neu plazieren...
-        cout << "*";                      // ...und neu schreiben
-        altPosX = neuPosX;
-        altPosY = neuPosY;
-    }
-    void moveant()
-    {
-    for ( int zeit = 1; zeit++;)
-        {
+    SetMyCursor (neuPosX, neuPosY);        //Cursor neup plazieren...
+    cout << "*";                           // ...und neu malen
+    altPosX = neuPosX;
+    altPosY = neuPosY;
+}
 
-            SetMyCursor(40,24);
-            {
-                cout << "ants:" << ant;
-                cout  << "  ";
-            }
-            int zufallszahl;
-            SetMyCursor(29,24);
+void dayst()
+{
+    int x[ant];
+                int y[ant];
+ while (ende == 0) //Solange das Spiel nicht beendet ist führe das aus.
+    {
+    for ( int zeit; zeit++;)
+    {
+                int zufallszahl;
+                SetMyCursor(28,24);
             {
                 cout << "Tage:" << zeit;
-                Sleep(100);
                 cout  << "  ";
             }
-            newant = 0;
-            if (newant == 0)
+            for (int i = 0; i < ant; i++)
             {
-                char ants[ant];
-                int x[ant];
-                int y[ant];
+                zufallszahl = rand() %9 +1;
 
-                for (int i = 0; i < ant; i++)
-                {
-                    zufallszahl = rand() %9 +1; //Hier  wird die Ameise zufällig bewegt.
+                if (zufallszahl == 1 && x[i] != 78 && y[i] !=22)
+                    BewegeAmeise(x[i], y[i], x[i]+1, y[i]+1);
 
-                    if (zufallszahl == 1 && x[i] != 78 && y[i] !=22)
-                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]+1);
+                if (zufallszahl == 2 && x[i] != 2 && y[i] != 2)
+                    BewegeAmeise(x[i], y[i], x[i]-1, y[i]-1);
 
-                    if (zufallszahl == 2 && x[i] != 2 && y[i] != 2)
-                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]-1);
+                if (zufallszahl == 3 && x[i] != 2)
+                    BewegeAmeise(x[i], y[i], x[i]-1, y[i]);
 
-                    if (zufallszahl == 3 && x[i] != 2)
-                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]);
+                if (zufallszahl == 4 && y[i] != 2)
+                    BewegeAmeise(x[i], y[i], x[i], y[i]-1);
 
-                    if (zufallszahl == 4 && y[i] != 2)
-                        BewegeAmeise(x[i], y[i], x[i], y[i]-1);
+                if (zufallszahl == 4 && x[i] != 78)
+                    BewegeAmeise(x[i], y[i], x[i]+1, y[i]);
 
-                    if (zufallszahl == 5 && x[i] != 78)
-                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]);
+                if (zufallszahl == 5 && x[i] != 78 && y[i] != 2)
+                    BewegeAmeise(x[i], y[i], x[i]+1, y[i]-1);
 
-                    if (zufallszahl == 6 && x[i] != 78 && y[i] != 2)
-                        BewegeAmeise(x[i], y[i], x[i]+1, y[i]-1);
+                if (zufallszahl == 6 && x[i] != 2 && y[i] != 22)
+                    BewegeAmeise(x[i], y[i], x[i]-1, y[i]+1);
 
-                    if (zufallszahl == 7 && x[i] != 2 && y[i] != 22)
-                        BewegeAmeise(x[i], y[i], x[i]-1, y[i]+1);
+                if (zufallszahl == 7 && y[i] != 22)
+                    BewegeAmeise(x[i], y[i], x[i], y[i]+1);
 
-                    if (zufallszahl == 8 && y[i] != 22)
-                        BewegeAmeise(x[i], y[i], x[i], y[i]+1);
+                if (zufallszahl == 8){};
 
-                    if (zufallszahl == 9) {};
-
-                    /*if (leaves > 85)
-                    {
-                        bornant = rand() %200;
-
-                        if (bornant == 1)
-                        {
-                            ant++;
-                            newant =1;
-                            bornant =0;
-                        }
-
-                    }*/
-                }
             }
 }
+
 }
-};
+}
 /*
 ==============================================================================================================================
 Setzt die Position des Cursers um Zeichen zu setzen.
@@ -575,8 +553,8 @@ void simulation()
 
     while (ende == 0) //Solange das Spiel nicht beendet ist, führe das aus.
     {
-        Ant(spawnant());
-        moveants(BewegeAmeise());
+        spawnant();
+        BewegeAmeise();
         hotkeys ();
         Nachrichten();
 
