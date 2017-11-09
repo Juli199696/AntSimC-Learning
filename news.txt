@@ -1,3 +1,3 @@
-Gotta work hard on the new features that allows/n
-to create new ants. Also new enviourments will/n
-be there soon!
+For the next weeks i will try to port the code over
+from structurated programming to object orientated programming.
+Thank you for viewing! If you can offer any help please open a issue on Github!
