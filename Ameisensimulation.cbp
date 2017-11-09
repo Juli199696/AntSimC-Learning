@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -23,6 +24,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="libs/curl-7.39.0-devel-mingw32/include" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -47,7 +49,32 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="include/SetMyCursor.h" />
+		<Unit filename="include/ant.h" />
+		<Unit filename="include/datawrite.h" />
+		<Unit filename="include/days.h" />
+		<Unit filename="include/environment.h" />
+		<Unit filename="include/foods.h" />
+		<Unit filename="include/hotkeys.h" />
+		<Unit filename="include/main.h" />
+		<Unit filename="include/messages.h" />
+		<Unit filename="include/news.h" />
+		<Unit filename="include/shop.h" />
+		<Unit filename="include/simulation.h" />
+		<Unit filename="include/weather.h" />
+		<Unit filename="src/Ant.cpp" />
+		<Unit filename="src/SetMyCursor.cpp" />
+		<Unit filename="src/datawrite.cpp" />
+		<Unit filename="src/days.cpp" />
+		<Unit filename="src/environment.cpp" />
+		<Unit filename="src/foods.cpp" />
+		<Unit filename="src/hotkeys.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/messages.cpp" />
+		<Unit filename="src/news.cpp" />
+		<Unit filename="src/shop.cpp" />
+		<Unit filename="src/simulation.cpp" />
+		<Unit filename="src/weather.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

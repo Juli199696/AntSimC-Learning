@@ -74,7 +74,7 @@
 
 1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\typecheck-gcc.h
 
-1510180340 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\main.cpp
+1510254232 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\main.cpp
 	<iostream>
 	<conio.h>
 	<windows.h>
@@ -82,6 +82,7 @@
 	<string>
 	<curl/curl.h>
 	<cstdlib>
+	<ant.h>
 
 1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\curl.h
 	"curlver.h"
@@ -116,4 +117,187 @@
 	"curl.h"
 
 1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\libs\curl-7.39.0-devel-mingw32\include\curl\typecheck-gcc.h
+
+1510254987 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\ant.h
+
+1510256684 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\ant.cpp
+	"ant.h"
+	"foods.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+
+1510252013 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\foods.h
+
+1510252897 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\days.cpp
+	"days.h"
+	"ant.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+	<simulation.h>
+
+1510254891 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\days.h
+
+1510254455 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\simulation.h
+
+1510256248 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\foods.cpp
+	"foods.h"
+	"days.h"
+	"ant.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+	<simulation.h>
+
+1510254794 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\environment.cpp
+	"environment.h"
+	"foods.h"
+	"days.h"
+	"ant.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+	<simulation.h>
+
+1510254806 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\environment.h
+
+1510253961 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\hotkeys.cpp
+	"hotkeys.h"
+	"days.h"
+	"ant.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+	<simulation.h>
+	"environment.h"
+	<shop.h>
+
+1510250625 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\hotkeys.h
+
+1510253580 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\shop.h
+
+1510254146 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\messages.cpp
+	"messages.h"
+	"foods.h"
+	"days.h"
+	"ant.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+	<simulation.h>
+	<weather.h>
+
+1510249949 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\messages.h
+
+1510254100 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\weather.h
+
+1510255382 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\news.cpp
+	"news.h"
+	"messages.h"
+	"foods.h"
+	"days.h"
+	"ant.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+	<simulation.h>
+	<weather.h>
+
+1510249931 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\news.h
+
+1510254817 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\shop.cpp
+	"shop.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<curl/curl.h>
+	<cstdlib>
+	<ant.h>
+	<simulation.h>
+	<foods.h>
+	<environment.h>
+
+1510255498 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\main.cpp
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<curl/curl.h>
+	<cstdlib>
+
+1510255363 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\simulation.cpp
+	"simulation.h"
+	"ant.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+	<days.h>
+	<foods.h>
+	<main.h>
+
+1510255307 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\main.h
+
+1510255467 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\weather.cpp
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+	<weather.h>
+
+1510256561 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\setmycurser.cpp
+	"setmycurser.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+
+1510256412 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\setmycurser.h
+
+1510256536 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\datawrite.cpp
+	"datawrite.h"
+
+1510255597 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\datawrite.h
+
+1510257148 source:c:\users\mrnope\documents\github\antsimcpluspluslearningoop\src\setmycursor.cpp
+	"SetMyCursor.h"
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<cstdlib>
+
+1510257075 c:\users\mrnope\documents\github\antsimcpluspluslearningoop\include\setmycursor.h
 
