@@ -52,8 +52,8 @@ Changelog 15.10.2017:
 #include <curl/curl.h>
 #include <cstdlib>
 
-float version = 2.3;
-float updater = 1.2;
+float version = 2.5;
+float updater = 1.5;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
@@ -585,7 +585,7 @@ void NewsCheck()
     CURL *curl;
     FILE *fp;
     CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/news.txt";
+    char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/news.txt";
     char outfilename[FILENAME_MAX] = "./news.txt";
     curl = curl_easy_init();
     if (curl)
@@ -635,7 +635,7 @@ void UpdateCheck()
     CURL *curl;
     FILE *fp;
     CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/version.cfg";
+    char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/version.cfg";
     char outfilename[FILENAME_MAX] = "./version.cfg";
     curl = curl_easy_init();
     if (curl)
@@ -668,7 +668,7 @@ void UpdateCheck()
     CURL *dpatcher;
     FILE *dfp;
     CURLcode dres;
-    char *durl= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/patcher.cfg";
+    char *durl= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/patcher.cfg";
     char doutfilename[FILENAME_MAX] = "./patcher.cfg";
     dpatcher = curl_easy_init();
     if (dpatcher)
@@ -752,7 +752,7 @@ void UpdateCheck()
         CURLcode res;
         cout << "24%"<< endl;
         Sleep(500);
-        char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/Updater/Updater/bin/Release/Updater.exe";
+        char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/blob/dev/Updater/Updater/bin/Release/Updater.exe";
         char outfilename[FILENAME_MAX] = "./Updater.exe";
         cout << "34%"<< endl;
         Sleep(500);

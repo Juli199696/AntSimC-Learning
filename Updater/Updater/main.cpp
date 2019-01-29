@@ -22,7 +22,7 @@ void UpdaterDownload()
      CURL *curl;
      FILE *fp;
     CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/bin/Release/Ameisensimulation.exe";
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/blob/dev/bin/Release/Ameisensimulation.exe";
     char outfilename[FILENAME_MAX] = "./Ameisensimulation.exe";
     curl = curl_easy_init();
     if (curl) {
@@ -80,7 +80,7 @@ ifstream version ("version.cfg");
 CURL *curl;
      FILE *fp;
     CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/version.cfg";
+    char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/version.cfg";
     char outfilename[FILENAME_MAX] = "./version.cfg";
     curl = curl_easy_init();
     if (curl) {

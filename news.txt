@@ -1,3 +1,0 @@
-Happy new year to all! Much stuff happend, maybe i get some time soon to work
-on this. Structurated programming to object orientated programming is my next step.
-Thank you for viewing! If you can offer any help please open a issue on Github!

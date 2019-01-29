@@ -22,24 +22,9 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="libs/curl-7.39.0-devel-mingw32/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libcrypto.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libcrypto.dll.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libcurl.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libcurldll.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libidn.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libidn.dll.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\librtmp.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libssh2.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libssh2dll.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libssl.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libssl.dll.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libz.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libz.dll.a" />
-					<Add library="libs\curl-7.39.0-devel-mingw32\lib\libzdll.a" />
 				</Linker>
 			</Target>
 		</Build>
