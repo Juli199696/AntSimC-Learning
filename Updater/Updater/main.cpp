@@ -22,7 +22,7 @@ void UpdaterDownload()
      CURL *curl;
      FILE *fp;
     CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/blob/dev/bin/Release/Ameisensimulation.exe";
+    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/bin/Release/Ameisensimulation.exe";
     char outfilename[FILENAME_MAX] = "./Ameisensimulation.exe";
     curl = curl_easy_init();
     if (curl) {
@@ -51,7 +51,7 @@ void UpdaterDownload()
 
 void UpdaterDownloadCheck()
 {
-     if (system("ping -n 1 gaming-ftw.de")){
+     if (system("ping -n 1 google.de")){
           system("cls");
           cout<<"\nNot connnected to the internet or blocked IP\n\n";
           cout << "Update failed, go back to previous version.";
