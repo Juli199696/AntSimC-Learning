@@ -22,7 +22,7 @@ void UpdaterDownload()
      CURL *curl;
      FILE *fp;
     CURLcode res;
-    char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/raw/dev/bin/Release/Ameisensimulation.exe";
+    char *url= "https://gaming-ftw.de/antsimupdates/Ameisensimulation.exe";
     char outfilename[FILENAME_MAX] = "./Ameisensimulation.exe";
     curl = curl_easy_init();
     if (curl) {

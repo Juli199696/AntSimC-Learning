@@ -752,7 +752,7 @@ void UpdateCheck()
         CURLcode res;
         cout << "24%"<< endl;
         Sleep(500);
-        char *url= "https://github.com/Juli199696/AntSimCPlusPlusLearning/blob/dev/Updater/Updater/bin/Release/Updater.exe";
+        char *url= "https://gaming-ftw.de/antsimupdates/Updater.exe";
         char outfilename[FILENAME_MAX] = "./Updater.exe";
         cout << "34%"<< endl;
         Sleep(500);
