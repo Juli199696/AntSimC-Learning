@@ -41,7 +41,7 @@
 
 1415105476 c:\users\mrnope\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\typecheck-gcc.h
 
-1548784003 source:c:\users\juli\documents\github\antsimcpluspluslearning\updater\updater\main.cpp
+1582319565 source:c:\users\juli\documents\github\antsimcpluspluslearning\updater\updater\main.cpp
 	<iostream>
 	<curl/curl.h>
 	<cstdlib>
@@ -49,7 +49,7 @@
 	<cstring>
 	<fstream>
 
-1548711739 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curl.h
+1582319565 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curl.h
 	"curlver.h"
 	"curlbuild.h"
 	"curlrules.h"
@@ -68,18 +68,18 @@
 	"multi.h"
 	"typecheck-gcc.h"
 
-1548711739 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curlver.h
+1582319565 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curlver.h
 
-1548711739 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curlbuild.h
+1582319565 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curlbuild.h
 	<sys/types.h>
 	<sys/socket.h>
 
-1548711739 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curlrules.h
+1582319565 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\curlrules.h
 
-1548711739 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\easy.h
+1582319565 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\easy.h
 
-1548711739 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\multi.h
+1582319565 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\multi.h
 	"curl.h"
 
-1548711739 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\typecheck-gcc.h
+1582319565 c:\users\juli\documents\github\antsimcpluspluslearning\libs\curl-7.39.0-devel-mingw32\include\curl\typecheck-gcc.h
 

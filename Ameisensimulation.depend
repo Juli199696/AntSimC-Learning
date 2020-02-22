@@ -127,3 +127,12 @@
 
 1548711035 c:\users\juli\desktop\antsimcpluspluslearning-dev\libs\curl-7.39.0-devel-mingw32\include\curl\urlapi.h
 
+1582328981 source:c:\users\juli\documents\github\antsimcpluspluslearning\main.cpp
+	<iostream>
+	<conio.h>
+	<windows.h>
+	<fstream>
+	<string>
+	<curl/curl.h>
+	<cstdlib>
+

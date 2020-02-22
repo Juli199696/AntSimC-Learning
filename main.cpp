@@ -1,5 +1,24 @@
 /* 06.11.2017 Ant Simulation version : 2.1 Dev  Autor: Julian Märtin
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ==============================================================================================================================
 Allgemeine Programm Infos wie Changelog und vorhandene Funktionen.
 ==============================================================================================================================
@@ -51,9 +70,9 @@ Changelog 15.10.2017:
 #include <string>
 #include <curl/curl.h>
 #include <cstdlib>
+#include <cstdio>
+float version = 3.1;
 
-float version = 2.5;
-float updater = 1.5;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
@@ -585,22 +604,14 @@ void NewsCheck()
     CURL *curl;
     FILE *fp;
     CURLcode res;
-    char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/news.txt";
+    char *url= "http://gaming-ftw.de/antsimupdates/news.txt";
     char outfilename[FILENAME_MAX] = "./news.txt";
     curl = curl_easy_init();
     if (curl)
     {
         fp = fopen(outfilename,"wb");
         curl_easy_setopt(curl, CURLOPT_URL, url);
-        /* Setup the https:// verification options - note we do this on all requests as there may
-           be a redirect from http to https and we still want to verify */
-        //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_easy_setopt(curl, CURLOPT_CAINFO, "./ca-bundle.crt");
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
-
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, NULL);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
@@ -609,20 +620,22 @@ void NewsCheck()
     }
 }
 
+
+
 void UpdateCheck()
 {
 
-    ofstream cfgconfig;
+ofstream cfgconfig;
     cfgconfig.open ("version.cfg");
     cfgconfig << "Version = " << version;
     cfgconfig.close();
 
-    ofstream patcherconfig;
-    patcherconfig.open ("patcher.cfg");
-    patcherconfig << "Updater = " << updater;
-    patcherconfig.close();
 
-    string patcherold;
+
+
+
+
+
     string versionold;
     ifstream version ("version.cfg");
     if (version.is_open())
@@ -632,67 +645,27 @@ void UpdateCheck()
         }
         version.close();
     }
-    CURL *curl;
+     CURL *curl;
     FILE *fp;
     CURLcode res;
-    char *url= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/version.cfg";
-    char outfilename[FILENAME_MAX] = "./version.cfg";
+    char *url = "http://gaming-ftw.de/antsimupdates/version.cfg";
+    char outfilename[FILENAME_MAX] = "version.cfg";
     curl = curl_easy_init();
     if (curl)
     {
         fp = fopen(outfilename,"wb");
         curl_easy_setopt(curl, CURLOPT_URL, url);
-        /* Setup the https:// verification options - note we do this on all requests as there may
-           be a redirect from http to https and we still want to verify */
-        //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_easy_setopt(curl, CURLOPT_CAINFO, "./ca-bundle.crt");
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
-
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, NULL);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
         fclose(fp);
-
-    }
-    ifstream patcher ("patcher.cfg");
-    if (patcher.is_open())
-    {
-        while ( getline (patcher,patcherold) )
-        {
-        }
-        patcher.close();
-    }
-    CURL *dpatcher;
-    FILE *dfp;
-    CURLcode dres;
-    char *durl= "https://raw.githubusercontent.com/Juli199696/AntSimCPlusPlusLearning/dev/patcher.cfg";
-    char doutfilename[FILENAME_MAX] = "./patcher.cfg";
-    dpatcher = curl_easy_init();
-    if (dpatcher)
-    {
-        dfp = fopen(doutfilename,"wb");
-        curl_easy_setopt(dpatcher, CURLOPT_URL, durl);
-        /* Setup the https:// verification options - note we do this on all requests as there may
-           be a redirect from http to https and we still want to verify */
-        //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_easy_setopt(dpatcher, CURLOPT_CAINFO, "./ca-bundle.crt");
-        curl_easy_setopt(dpatcher, CURLOPT_SSL_VERIFYPEER, false);
-        curl_easy_setopt(dpatcher, CURLOPT_SSL_VERIFYHOST, false);
-
-        curl_easy_setopt(dpatcher, CURLOPT_WRITEFUNCTION, write_data);
-        curl_easy_setopt(dpatcher, CURLOPT_FOLLOWLOCATION, 1);
-        curl_easy_setopt(dpatcher, CURLOPT_WRITEDATA, dfp);
-        dres = curl_easy_perform(dpatcher);
-        curl_easy_cleanup(dpatcher);
-        fclose(dfp);
-
     }
 
     string versionneu;
-    string patchernew;
+
+
+
     ifstream versionabfrage ("version.cfg");
     if (versionabfrage.is_open())
     {
@@ -705,11 +678,11 @@ void UpdateCheck()
     {
         cout << "You already got the newest version of AntSim :) " << versionold <<endl;
         Sleep(2000);
-
+        checkupdates = 1;
     }
     else
     {
-        ofstream cfgconfig;
+		ofstream cfgconfig;
         cfgconfig.open ("version.cfg");
         cfgconfig << versionold;
         cfgconfig.close();
@@ -717,72 +690,32 @@ void UpdateCheck()
         cout << "New update!" << endl;
         cout << "New version: " << versionneu << endl;
         Sleep(2000);
-    }
 
-    ifstream patchercheck ("patcher.cfg");
-    if (patchercheck.is_open())
-    {
-        while ( getline (patchercheck,patchernew) )
-        {
-        }
-        patchercheck.close();
-    }
-    if (patcherold == patchernew)
-    {
-        cout << "Updater v. " << patcherold;
-        Sleep(2000);
-
-    }
-    else
-    {
-        ofstream patcherconfig;
-        patcherconfig.open ("patcher.cfg");
-        patcherconfig << patcherold;
-        patcherconfig.close();
-        cout << "Updater v. " << patcherold << endl;
-        cout << "New updater v. " << patchernew << endl;
         cout << "Updating!" << endl;
         Sleep(3000);
-        CURL *curl;
-        cout << "1%"<< endl;
-        Sleep(500);
-        FILE *fp;
-        cout << "12%"<< endl;
-        Sleep(500);
-        CURLcode res;
-        cout << "24%"<< endl;
-        Sleep(500);
-        char *url= "https://gaming-ftw.de/antsimupdates/Updater.exe";
-        char outfilename[FILENAME_MAX] = "./Updater.exe";
-        cout << "34%"<< endl;
-        Sleep(500);
-        curl = curl_easy_init();
-        if (curl)
-        {
-            fp = fopen(outfilename,"wb");
-            cout << "45%"<< endl;
-            Sleep(500);
-            curl_easy_setopt(curl, CURLOPT_URL, url);
-            /* Setup the https:// verification options - note we do this on all requests as there may
-               be a redirect from http to https and we still want to verify */
-            //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1);
-            curl_easy_setopt(curl, CURLOPT_CAINFO, "./ca-bundle.crt");
-            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
-            cout << "69%"<< endl;
-            Sleep(500);
-            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-            curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
-            curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-            cout << "78%"<< endl;
-            Sleep(500);
-            res = curl_easy_perform(curl);
-            curl_easy_cleanup(curl);
-            cout << "90%"<< endl;
-            Sleep(500);
-            fclose(fp);
+         CURL *curl;
+    FILE *fp;
+    CURLcode res;
+    char *url = "http://gaming-ftw.de/antsimupdates/Ameisensimulation.exe";
+    char outfilename[FILENAME_MAX] = "./Ameisensimulationnew.exe";
+    curl = curl_easy_init();
+    if (curl)
+    {
+        fp = fopen(outfilename,"wb");
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, NULL);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+        res = curl_easy_perform(curl);
+        curl_easy_cleanup(curl);
+        fclose(fp);
             cout << "Update complete! :)"<< endl;
             Sleep(3000);
+            rename("./Ameisensimulation.exe","./Ameisensimulation_old.exe");
+            rename("./Ameisensimulationnew.exe","./Ameisensimulation.exe");
+
+             system("start Ameisensimulation.exe" ) ;
+
+            exit(0);
 
         }
     }
@@ -795,6 +728,7 @@ Startprogramm zum ausführen der Simulation.
 */
 void start()
 {
+
     if (checkupdates == 0)
     {
         if (system("ping -n 1 gaming-ftw.de"))
@@ -817,8 +751,7 @@ void start()
         }
     }
 
-
-    checkupdates = 1;
+    NewsCheck();
     system("cls");
     cout << " ____________________________________________________ " << endl;
     cout << "|Willkommen zur Ameisen Simulation!                  |" << endl;
@@ -901,8 +834,9 @@ void start()
 
     }
     if (zahl == 4)          //Updates the program.
-        system("start Updater.exe" ) ;
-    exit(0);
+        checkupdates=0;
+        start();
+
 }
 
 
@@ -913,6 +847,8 @@ Das Hauptprogramm wird inizialisiert und führt die unter Programme aus.
 */
 int main()
 {
+remove( "./Ameisensimulation_old.exe" );
+
     HANDLE console;                                         //Dient zur vergrößerung des Consolen Fensters
     COORD screenBufferSize;
     SMALL_RECT windowSize;
@@ -926,7 +862,20 @@ int main()
     windowSize.Bottom = 30;
     SetConsoleWindowInfo(console, true, &windowSize);
 
+
     start();                //Führt das unterprogramm start aus
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
